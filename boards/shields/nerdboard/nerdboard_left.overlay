@@ -1,0 +1,17 @@
+#include "nerdboard.overlay"
+
+&kscan0 {
+    row-gpios
+        = <&pro_micro 21 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // F4
+        , <&pro_micro 20 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // F5
+        , <&pro_micro 19 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // F6
+        , <&pro_micro 18 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // F7
+        ;
+
+    col-gpios
+        = <&pro_micro 5 GPIO_ACTIVE_LOW> // C6
+        , <&pro_micro 6 GPIO_ACTIVE_LOW> // D7
+        , <&pro_micro 7 GPIO_ACTIVE_LOW> // E6
+        , <&pro_micro 8 GPIO_ACTIVE_LOW> // B4
+        ;
+};
