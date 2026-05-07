@@ -29,26 +29,26 @@ RC(2,0) RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5) RC(2,6) RC(2,7)
     };
 };
 
-//&pinctrl {
-//    spi0_default: spi0_default {
-//        group1 {
-//            psels = <NRF_PSEL(SPIM_SCK, 0, 20)>, // Adjust based on Pro Micro SCLK
-//                    <NRF_PSEL(SPIM_MOSI, 0, 17)>, 
-//                    <NRF_PSEL(SPIM_MISO, 0, 15)>;
-//        };
-//    };
-//};
-//
-//&spi0 {
-//    status = "okay";
-//    pinctrl-0 = <&spi0_default>;
-//    pinctrl-names = "default";
-//    cs-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>; // B6 is Pro Micro 10
-//
-//    trackball: pmw3389@0 {
-//        compatible = "pixart,pmw3389";
-//        reg = <0>;
-//        spi-max-frequency = <2000000>;
-//        irq-gpios = <&pro_micro 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; // You need to find your IRQ pin!
-//    };
-//};
+&pinctrl {
+    spi0_default: spi0_default {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 0, 20)>, // Adjust based on Pro Micro SCLK
+                    <NRF_PSEL(SPIM_MOSI, 0, 17)>, 
+                    <NRF_PSEL(SPIM_MISO, 0, 15)>;
+        };
+    };
+};
+
+&spi0 {
+    status = "okay";
+    pinctrl-0 = <&spi0_default>;
+    pinctrl-names = "default";
+    cs-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>; // B6 is Pro Micro 10
+
+    trackball: pmw3389@0 {
+        compatible = "pixart,pmw3389";
+        reg = <0>;
+        spi-max-frequency = <2000000>;
+        irq-gpios = <&pro_micro 1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>; // You need to find your IRQ pin!
+    };
+};
