@@ -21,16 +21,9 @@
 };
 
 / {
-    trackball_rotate: trackball_rotate {
-        compatible = "zmk,input-processor-rotate";
-        #input-processor-cells = <0>;
-        status = "okay";
-    };
-
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        input-processors = <&trackball_rotate>;
     };
 };
 
