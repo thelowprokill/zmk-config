@@ -1,0 +1,5 @@
+config SHIELD_NERDBOARD_LEFT
+    def_bool $(shields_list_contains,nerdboard_left)
+
+config SHIELD_NERDBOARD_RIGHT
+    def_bool $(shields_list_contains,nerdboard_right)
