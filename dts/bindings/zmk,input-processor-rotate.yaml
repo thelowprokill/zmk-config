@@ -1,0 +1,11 @@
+description: ZMK input processor for arbitrary-angle XY rotation
+
+compatible: "zmk,input-processor-rotate"
+
+include: base.yaml
+
+properties:
+  "#input-processor-cells":
+    type: int
+    const: 0
+    required: true
