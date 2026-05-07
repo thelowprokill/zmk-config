@@ -1,5 +1,4 @@
 #include "nerdboard.overlay"
-#include <dt-bindings/zmk/input_transform.h>
 
 &default_transform {
     col-offset = <4>;
@@ -31,7 +30,7 @@
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        input-processors = <&trackball_rotate &zip_xy_transform INPUT_TRANSFORM_Y_INVERT>;
+        input-processors = <&trackball_rotate>;
     };
 };
 

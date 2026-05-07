@@ -5,12 +5,19 @@
 #include <zephyr/input/input.h>
 #include <zmk/input/processors.h>
 
-/* -15 degree rotation (scaled by 1000):
+/* -15 degree rotation + Y inversion (scaled by 1000):
  *   cos(-15°) =  966 / 1000
  *   sin(-15°) = -259 / 1000
  *
- *   x' =  cos*x - sin*y =  966*x + 259*y
- *   y' =  sin*x + cos*y = -259*x + 966*y
+ * Step 1 — rotate -15°:
+ *   x' =  966*x + 259*y
+ *   y' = -259*x + 966*y
+ * Step 2 — invert Y:
+ *   y'' = -y' = 259*x - 966*y
+ *
+ * Combined:
+ *   x' =  966*x + 259*y
+ *   y' =  259*x - 966*y
  *
  * X is buffered when it arrives and suppressed; both axes are emitted
  * with corrected values once Y arrives.
@@ -49,7 +56,7 @@ static int rotate_handle_event(const struct device *dev,
         int32_t ry = event->value;
 
         int32_t new_x = (ROT_COS * rx - ROT_SIN * ry) / 1000;
-        int32_t new_y = (ROT_SIN * rx + ROT_COS * ry) / 1000;
+        int32_t new_y = (ROT_SIN * rx - ROT_COS * ry) / 1000; /* minus ROT_COS = invert Y after rotation */
 
         data->x_ready = false;
         data->injecting = true;
