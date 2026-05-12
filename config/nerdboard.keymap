@@ -10,21 +10,25 @@
 #include <dt-bindings/zmk/mouse.h>
 
 // layer definitions
-#define _JONMAC 0
-#define _JM_EXT 1
-#define _SYMBOL 2
-#define _MOUSE  3
-#define _FN     4
-#define _GAME   5
+//#define _GAME    5
+#define _JONMAC  0
+#define _JM_EXT  1
+#define _SYMBOL  2
+#define _MOUSE   3
+#define _FN      4
+#define _SNIPE   5
+#define _DRGSCRL 6
 
 // layer modifiers
+#define GAME    &to _GAME
 #define JONMAC  &to _JONMAC
 #define GJONMAC &mo _JONMAC
 #define JM_EXT  &mo _JM_EXT
 #define SYMBOL  &mo _SYMBOL
 #define MOUSE   &mo _MOUSE
 #define FN      &mo _FN
-#define GAME    &to _GAME
+#define SNIPE   &mo _SNIPE
+#define DRGSCRL &mo _DRGRCRL
 
 // layer tap
 #define MO_TAB &lt _MOUSE  TAB
@@ -49,9 +53,9 @@
 
 //        game_layer {
 //            bindings = <
-//    &kp TAB   &kp N1  &kp N2    &kp LG(L)       &mkp MCLK  &kp  N4    &kp F     GAME
-//    &kp LSHFT &kp A   &kp W     &kp D           &mkp MB4   &mkp MB5   &kp R     SYMBOL
-//    &kp LALT  &kp Q   &kp S     &kp E           &mkp LCLK  &mkp RCLK  &none     &none
+//    &kp TAB   &kp N1  &kp N2    &kp LG(L)       &mkp MCLK &kp  N4    &kp F GAME
+//    &kp LSHFT &kp A   &kp W     &kp D           &mkp MB4  &mkp MB5   &kp R SYMBOL
+//    &kp LALT  &kp Q   &kp S     &kp E           &mkp LCLK &mkp RCLK  SNIPE DRGSCRL
 //              &kp ESC &kp LCTRL &kp SPACE       SYMBOL    GJONMAC
 //            >;
 //        };
@@ -87,7 +91,7 @@
             bindings = <
     &kp T_TAB_C  &kp T_TAB_N  &trans    &kp LG(T)        &mkp MCLK &trans    &trans    &trans
     &kp T_TAB_L  &kp T_TAB_R  &kp WS_L  &kp WS_R         &mkp MB4  &mkp MB5  &kp RCTRL &trans
-    &kp LSHFT    &kp LCTRL    &kp LALT  &kp LGUI         &mkp LCLK &mkp RCLK &trans    &trans
+    &kp LSHFT    &kp LCTRL    &kp LALT  &kp LGUI         &mkp LCLK &mkp RCLK SNIPE     DRGSCRL
                  &trans       FN        &trans           FN        &trans
             >;
         };
@@ -101,5 +105,22 @@
             >;
         };
 
+        snipe_layer {
+            bindings = <
+    &trans &trans &trans &trans    &trans &trans &trans &tarns
+    &trans &trans &trans &trans    &trans &trans &trans &tarns
+    &trans &trans &trans &trans    &trans &trans &trans &tarns
+           &trans &trans &trans    &trans &trans
+            >;
+        };
+
+        dragscroll_layer {
+            bindings = <
+    &trans &trans &trans &trans    &trans &trans &trans &tarns
+    &trans &trans &trans &trans    &trans &trans &trans &tarns
+    &trans &trans &trans &trans    &trans &trans &trans &tarns
+           &trans &trans &trans    &trans &trans
+            >;
+        };
     };
 };
