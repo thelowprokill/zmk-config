@@ -41,10 +41,10 @@
 
         mouse_layer {
             bindings = <
-    &trans    &kp N7    &kp N8    &kp N9       &kp MINUS &kp PLUS  &kp ASTRK &kp FSLH
-    &kp LSHFT &kp N4    &kp N5    &kp N6       &kp BSPC  &kp BSPC  &kp SQT   &kp DQT
-    &trans    &kp N1    &kp N2    &kp N3       &kp LEFT  &kp DOWN  &kp UP    &kp RIGHT
-              &kp LGUI  &trans    &kp SPACE    &kp RET   &kp RALT
+    &kp LS(LC(W)) &kp LS(LC(T))   &trans        &kp LG(T)        &mkp MCLK &trans    &trans    &trans
+    &kp LC(PG_UP) &kp LC(PG_DN)   &kp LG(PG_UP) &kp LG(PG_DN)    &mkp MB4  &mkp MB5  &kp RCTRL &trans
+    &kp LSHFT     &kp LCTRl       &kp LALT      &kp LGUI         &mkp LCLK &mkp RCLK &trans    &trans
+                  &trans          &trans        &trans           &trans    &trans
             >;
         };
     };
