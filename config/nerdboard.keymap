@@ -15,6 +15,9 @@
 #define MOUSE  3
 #define FN     4
 
+// layer tap
+#define MO_TAB &lt MOUSE TAB
+
 // alternate keys
 #define WS_L    LG(PG_UP)
 #define WS_R    LG(PG_DN)
@@ -32,7 +35,7 @@
     &kp D       &kp W         &kp F        &kp P           &kp M        &kp U        &kp Y        &kp SEMI
     &mt LSHFT A &mt LCTRL R   &mt LALT S   &mt LSHIFT T    &kp N        &kp E        &kp I        &kp O
     &kp G       &kp X         &kp C        &kp V           &kp H        &kp J        &kp K        &kp L
-                &mt LCTRL RET &lt MOUSE TAB  &kp SPACE       &lt 2 GRAVE  &mo 1
+                &mt LCTRL RET MO_TAB       &kp SPACE       &lt 2 GRAVE  &mo 1
             >;
         };
 
