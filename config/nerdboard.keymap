@@ -9,6 +9,13 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/mouse.h>
 
+// layer keys
+#define JM_EXT 1
+#define SYMBOL 2
+#define MOUSE  3
+#define FN     4
+
+// alternate keys
 #define WS_L    LG(PG_UP)
 #define WS_R    LG(PG_DN)
 #define T_TAB_L LC(PG_UP)
@@ -25,7 +32,7 @@
     &kp D       &kp W         &kp F        &kp P           &kp M        &kp U        &kp Y        &kp SEMI
     &mt LSHFT A &mt LCTRL R   &mt LALT S   &mt LSHIFT T    &kp N        &kp E        &kp I        &kp O
     &kp G       &kp X         &kp C        &kp V           &kp H        &kp J        &kp K        &kp L
-                &mt LCTRL RET &lt 3 TAB    &kp SPACE       &lt 2 GRAVE  &mo 1
+                &mt LCTRL RET &lt MOUSE TAB  &kp SPACE       &lt 2 GRAVE  &mo 1
             >;
         };
 
