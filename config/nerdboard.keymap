@@ -18,7 +18,7 @@
 #define _GAME   5
 
 // layer modifiers
-#define JONMAC  &TG _JONMAC
+#define JONMAC  &tg _JONMAC
 #define GJONMAC &mo _JONMAC
 #define JM_EXT  &mo _JM_EXT
 #define SYMBOL  &mo _SYMBOL
