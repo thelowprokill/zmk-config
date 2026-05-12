@@ -31,10 +31,10 @@
 #define SY_GRV &lt _SYMBOL GRAVE
 
 // alternate keys
-#define L       LEFT
-#define D       DOWN
-#define U       UP
-#define R       RIGHT
+#define aL      LEFT
+#define aD      DOWN
+#define aU      UP
+#define aR      RIGHT
 #define TERM    LC(LA(T))
 #define WS_L    LG(PG_UP)
 #define WS_R    LG(PG_DN)
@@ -69,7 +69,7 @@
             bindings = <
     &trans    &kp N7    &kp N8    &kp N9       &kp MINUS &kp PLUS  &kp ASTRK &kp FSLH
     &kp LSHFT &kp N4    &kp N5    &kp N6       &kp BSPC  &kp BSPC  &kp SQT   &kp DQT
-    &trans    &kp N1    &kp N2    &kp N3       &kp L     &kp D     &kp U     &kp R
+    &trans    &kp N1    &kp N2    &kp N3       &kp aL    &kp aD    &kp aU    &kp aR
               &kp LGUI  FN        &kp SPACE    FN   &kp RALT
             >;
         };
@@ -85,10 +85,10 @@
 
         func_layer {
             bindings = <
-    &trans       &kp K_VOL_UP  &kp F5    &kp LG(L)       &kp INS   &kp PSCRN  &trans    GAME
-    &kp T_TAB_L  &kp K_MUTE    &kp F11   &kp TERM        &kp LGUI  &kp K_PREV &kp K_PP  &kp K_NEXT
-    &kp LSHFT    &kp K_VOL_DN  &kp HOME  &kp END         &kp LG(L) &kp LG(D)  &kp LG(U) &kp LG(R)
-                 &trans       &trans    &trans           &trans    &trans
+    &trans       &kp K_VOL_UP  &kp F5    &kp LG(L)       &kp INS    &kp PSCRN  &trans     GAME
+    &kp T_TAB_L  &kp K_MUTE    &kp F11   &kp TERM        &kp LGUI   &kp K_PREV &kp K_PP   &kp K_NEXT
+    &kp LSHFT    &kp K_VOL_DN  &kp HOME  &kp END         &kp LG(aL) &kp LG(aD) &kp LG(aU) &kp LG(aR)
+                 &trans       &trans    &trans           &trans     &trans
             >;
         };
 
