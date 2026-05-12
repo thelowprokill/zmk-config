@@ -18,13 +18,13 @@
 #define _GAME   5
 
 // layer modifiers
-#define JONMAC  &tg _JONMAC
+#define JONMAC  &to _JONMAC
 #define GJONMAC &mo _JONMAC
 #define JM_EXT  &mo _JM_EXT
 #define SYMBOL  &mo _SYMBOL
 #define MOUSE   &mo _MOUSE
 #define FN      &mo _FN
-#define GAME    &tg _GAME
+#define GAME    &to _GAME
 
 // layer tap
 #define MO_TAB &lt _MOUSE  TAB
