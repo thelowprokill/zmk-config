@@ -11,6 +11,7 @@
 #include <input/processors.dtsi>
 
 // layer definitions
+// If changing the _SNIPE or _DRGSCRL indexes also update them in boards/shields/nerdboard/nerdboard_right.overlay
 //#define _GAME    5
 #define _JONMAC  0
 #define _JM_EXT  1
