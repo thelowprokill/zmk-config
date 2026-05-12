@@ -28,7 +28,7 @@
 #define MOUSE   &mo _MOUSE
 #define FN      &mo _FN
 #define SNIPE   &mo _SNIPE
-#define DRGSCRL &mo _DRGRCRL
+#define DRGSCRL &mo _DRGSCRL
 
 // layer tap
 #define MO_TAB &lt _MOUSE  TAB
@@ -121,6 +121,21 @@
     &trans &trans &trans &trans    &trans &trans &trans &tarns
            &trans &trans &trans    &trans &trans
             >;
+        };
+    };
+
+    trackball_listener: trackball_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackball>;
+
+        drag_scroll {
+            layers = <_DRGSCRL>;
+            input-processors = <&zip_scroll_transform>;
+        };
+
+        snipe {
+            layers = <_SNIPE>;
+            input-processors = <&zip_xy_scaler 1 4>;
         };
     };
 };
