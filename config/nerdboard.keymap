@@ -9,6 +9,13 @@
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/mouse.h>
 
+#define WS_L    LG(PG_UP)
+#define WS_R    LG(PG_DN)
+#define T_TAB_L LC(PG_UP)
+#define T_TAB_R LC(PG_DN)
+#define T_TAB_N LS(LC(T))
+#define T_TAB_C LS(LC(W))
+
 / {
     keymap {
         compatible = "zmk,keymap";
@@ -42,10 +49,10 @@
 
         mouse_layer {
             bindings = <
-    &kp LS(LC(W)) &kp LS(LC(T))   &trans        &kp LG(T)        &mkp MCLK &trans    &trans    &trans
-    &kp LC(PG_UP) &kp LC(PG_DN)   &kp LG(PG_UP) &kp LG(PG_DN)    &mkp MB4  &mkp MB5  &kp RCTRL &trans
-    &kp LSHFT     &kp LCTRL       &kp LALT      &kp LGUI         &mkp LCLK &mkp RCLK &trans    &trans
-                  &trans          &trans        &trans           &trans    &trans
+    &kp T_TAB_C  &kp T_TAB_N  &trans    &kp LG(T)        &mkp MCLK &trans    &trans    &trans
+    &kp T_TAB_L  &kp T_TAB_R  &kp WS_L  &kp WS_R         &mkp MB4  &mkp MB5  &kp RCTRL &trans
+    &kp LSHFT    &kp LCTRL    &kp LALT  &kp LGUI         &mkp LCLK &mkp RCLK &trans    &trans
+                 &trans       &trans    &trans           &trans    &trans
             >;
         };
     };
