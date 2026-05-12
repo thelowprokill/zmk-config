@@ -47,6 +47,15 @@
     keymap {
         compatible = "zmk,keymap";
 
+//        game_layer {
+//            bindings = <
+//    &kp TAB   &kp N1  &kp N2    &kp LG(L)       &mkp MCLK  &kp  N4    &kp F     GAME
+//    &kp LSHFT &kp A   &kp W     &kp D           &mkp MB4   &mkp MB5   &kp R     SYMBOL
+//    &kp LALT  &kp Q   &kp S     &kp E           &mkp LCLK  &mkp RCLK  &none     &none
+//              &kp ESC &kp LCTRL &kp SPACE       SYMBOL    GJONMAC
+//            >;
+//        };
+
         jon_mac_layer {
             bindings = <
     &kp D       &kp W         &kp F       &kp P           &kp M   &kp U  &kp Y  &kp SEMI
@@ -92,13 +101,5 @@
             >;
         };
 
-        game_layer {
-            bindings = <
-    &kp TAB   &kp N1  &kp N2    &kp LG(L)       &mkp MCLK  &kp  N4    &kp F     GAME
-    &kp LSHFT &kp A   &kp W     &kp D           &mkp MB4   &mkp MB5   &kp R     SYMBOL
-    &kp LALT  &kp Q   &kp S     &kp E           &mkp LCLK  &mkp RCLK  &none     &none
-              &kp ESC &kp LCTRL &kp SPACE       SYMBOL    GJONMAC
-            >;
-        };
     };
 };
