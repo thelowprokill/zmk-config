@@ -15,9 +15,9 @@
         jon_mac_layer {
             bindings = <
     &kp D       &kp W         &kp F        &kp P           &kp M        &kp U        &kp Y        &kp SEMI
-    &mt LSHFT A &mt LCTRL     &mt LALT S   &mt LSHIFT T    &kp N        &kp E        &kp I        &kp O
+    &mt LSHFT A &mt LCTRL R   &mt LALT S   &mt LSHIFT T    &kp N        &kp E        &kp I        &kp O
     &kp G       &kp X         &kp C        &kp V           &kp H        &kp J        &kp K        &kp L
-                &mt LCTRL RET &lt 3 tab    &kp SPACE       &lt 2 GRAVE  &mo 1
+                &mt LCTRL RET &lt 3 TAB    &kp SPACE       &lt 2 GRAVE  &mo 1
             >;
         };
 
