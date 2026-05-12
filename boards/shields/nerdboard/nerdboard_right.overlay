@@ -25,6 +25,16 @@
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
+
+        drag_scroll {
+            layers = <6>; // _DRGSCRL
+            input-processors = <&zip_xy_to_scroll_mapper>;
+        };
+
+        snipe {
+            layers = <5>; // _SNIPE
+            input-processors = <&zip_xy_scaler 1 4>;
+        };
     };
 };
 

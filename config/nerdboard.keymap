@@ -125,18 +125,4 @@
         };
     };
 
-    trackball_listener: trackball_listener {
-        compatible = "zmk,input-listener";
-        device = <&trackball>;
-
-        drag_scroll {
-            layers = <_DRGSCRL>;
-            input-processors = <&zip_xy_to_scroll_mapper>;
-        };
-
-        snipe {
-            layers = <_SNIPE>;
-            input-processors = <&zip_xy_scaler 1 4>;
-        };
-    };
 };
