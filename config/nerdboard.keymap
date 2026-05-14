@@ -8,6 +8,7 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/mouse.h>
+#include <dt-bindings/zmk/outputs.h>
 #include <input/processors.dtsi>
 
 // layer definitions
@@ -73,10 +74,10 @@
 
         jon_mac_ext_layer {
             bindings = <
-    &trans    &trans    &trans    &kp LBRC     &kp RBRC  &trans    &trans    &trans
-    &kp Z     &kp Q     &kp B     &kp LBKT     &kp RBKT  &kp COMMA &kp DOT   &kp FSLH
-    &trans    &trans    &kp BSLH  &kp LPAR     &kp RPAR  &trans    &trans    &trans
-              &kp LCTRL &kp LSHFT &kp SPACE    SYMBOL    &kp RALT
+    &out OUT_USB &trans    &trans    &kp LBRC     &kp RBRC  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2
+    &kp Z        &kp Q     &kp B     &kp LBKT     &kp RBKT  &kp COMMA     &kp DOT       &kp FSLH
+    &out OUT_BLE &trans    &kp BSLH  &kp LPAR     &kp RPAR  &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_CLR
+                 &kp LCTRL &kp LSHFT &kp SPACE    SYMBOL    &kp RALT
             >;
         };
 
@@ -100,7 +101,7 @@
 
         func_layer {
             bindings = <
-    &trans       &kp K_VOL_UP  &kp F5    &kp LG(L)       &kp INS    &kp PSCRN  &trans     &trans
+    &trans       &kp K_VOL_UP  &kp F5    &kp LG(L)       &kp INS    &kp PSCRN  &sys_reset &trans
     &kp T_TAB_L  &kp K_MUTE    &kp F11   &kp TERM        &kp LGUI   &kp K_PREV &kp K_PP   &kp K_NEXT
     &kp LSHFT    &kp K_VOL_DN  &kp HOME  &kp END         &kp LG(aL) &kp LG(aD) &kp LG(aU) &kp LG(aR)
                  &trans        &trans    &trans          &trans     &trans
