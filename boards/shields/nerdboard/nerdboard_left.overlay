@@ -15,3 +15,25 @@
         , <&pro_micro 8 GPIO_ACTIVE_LOW> // B4
         ;
 };
+
+&i2c0 {
+    status = "okay";
+    compatible = "nordic,nrf-twi";
+    pinctrl-0 = <&i2c0_default>;
+    pinctrl-names = "default";
+
+    oled: ssd1306@3c {
+        compatible = "solomon,ssd1306fb";
+        reg = <0x3c>;
+        width = <128>;
+        height = <32>;
+        segment-remap;
+        com-invdir;
+        page-offset = <0>;
+        display-offset = <0>;
+        multiplex-ratio = <31>;
+        segment-offset = <0>;
+        com-sequential;
+        prechargep = <0x22>;
+    };
+};
