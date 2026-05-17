@@ -43,19 +43,19 @@
     };
 };
 
-/* THE PINCTRL BLOCK */
+/* THE PINCTRL BLOCK: Shifted away from the USB data lane traces */
 &pinctrl {
     i2c1_default: i2c1_default {
         group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 6)>,  /* Pin D2 / P0.06 */
-                    <NRF_PSEL(TWIM_SCL, 0, 8)>;  /* Pin D3 / P0.08 */
+            psels = <NRF_PSEL(TWIM_SDA, 0, 17)>,  /* Pin 017 */
+                    <NRF_PSEL(TWIM_SCL, 0, 20)>;  /* Pin 020 */
         };
     };
 
     i2c1_sleep: i2c1_sleep {
         group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 6)>,
-                    <NRF_PSEL(TWIM_SCL, 0, 8)>;
+            psels = <NRF_PSEL(TWIM_SDA, 0, 17)>,
+                    <NRF_PSEL(TWIM_SCL, 0, 20)>;
             low-power-enable;
         };
     };
