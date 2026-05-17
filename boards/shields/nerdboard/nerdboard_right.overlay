@@ -63,15 +63,15 @@
 
 /* 2. THE PINCTRL BLOCK: Must be outside the root block */
 &pinctrl {
-    i2c1_default: i2c0_default {
+    /* Changed names from i2c0 to i2c1 */
+    i2c1_default: i2c1_default {
         group1 {
             psels = <NRF_PSEL(TWIM_SDA, 0, 6)>,  /* Pin D2 / P0.06 */
                     <NRF_PSEL(TWIM_SCL, 0, 8)>;  /* Pin D3 / P0.08 */
         };
     };
 
-    /* ADD THIS BLOCK: Sleep configuration for the pins */
-    i2c1_sleep: i2c0_sleep {
+    i2c1_sleep: i2c1_sleep {
         group1 {
             psels = <NRF_PSEL(TWIM_SDA, 0, 6)>,
                     <NRF_PSEL(TWIM_SCL, 0, 8)>;
@@ -80,13 +80,13 @@
     };
 };
 
-/* 3. THE I2C BUS CONFIGURATION */
+/* 3. THE I2C BUS CONFIGURATION - Switched from i2c0 to i2c1 */
 &i2c1 {
     status = "okay";
-    compatible = "nordic,nrf-twi";
-    pinctrl-0 = <&i2c0_default>;
-    pinctrl-1 = <&i2c0_sleep>;               /* ADD THIS LINE */
-    pinctrl-names = "default", "sleep";     /* CHANGE THIS TO INCLUDE BOTH STRINGS */
+    compatible = "nordic,nrf-twim";             /* Using the Master variant 'nrf-twim' */
+    pinctrl-0 = <&i2c1_default>;
+    pinctrl-1 = <&i2c1_sleep>;               
+    pinctrl-names = "default", "sleep";     
 
     oled: ssd1306@3c {
         compatible = "solomon,ssd1306fb";
