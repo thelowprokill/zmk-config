@@ -1,21 +1,5 @@
 #include "nerdboard.overlay"
 
-&kscan0 {
-    row-gpios
-        = <&pro_micro 21 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // F4
-        , <&pro_micro 20 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // F5
-        , <&pro_micro 19 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // F6
-        , <&pro_micro 18 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // F7
-        ;
-
-    col-gpios
-        = <&pro_micro 5 GPIO_ACTIVE_LOW> // C6
-        , <&pro_micro 6 GPIO_ACTIVE_LOW> // D7
-        , <&pro_micro 7 GPIO_ACTIVE_LOW> // E6
-        , <&pro_micro 8 GPIO_ACTIVE_LOW> // B4
-        ;
-};
-
 / {
     /* Tell Zephyr this SSD1306 is the chosen display */
     chosen {
@@ -23,7 +7,7 @@
     };
 };
 
-/* THE PINCTRL BLOCK: Migrated to use i2c1 names */
+/* THE PINCTRL BLOCK */
 &pinctrl {
     i2c1_default: i2c1_default {
         group1 {
@@ -53,18 +37,13 @@
         compatible = "solomon,ssd1306fb";
         reg = <0x3c>;
         width = <128>;
-        height = <64>;          /* Correct height for your panel */
+        height = <64>;          
         segment-remap;
         com-invdir;
         page-offset = <0>;
         display-offset = <0>;
-        multiplex-ratio = <63>; /* (Height - 1) */
+        multiplex-ratio = <63>; 
         segment-offset = <0>;
-        
-        /* Standard 128x64 screens require sequential layout omitted or included.
-           We include it here as it matches the standard Amazon SSD1306 0.96" panels. */
-        com-sequential;
-        
-        prechargep = <0x22>;
+        prechargep = <0xF1>;
     };
 };
