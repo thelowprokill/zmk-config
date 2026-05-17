@@ -69,6 +69,15 @@
                     <NRF_PSEL(TWIM_SCL, 0, 8)>;  /* Pin D3 / P0.08 */
         };
     };
+
+    /* ADD THIS BLOCK: Sleep configuration for the pins */
+    i2c0_sleep: i2c0_sleep {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 6)>,
+                    <NRF_PSEL(TWIM_SCL, 0, 8)>;
+            low-power-enable;
+        };
+    };
 };
 
 /* 3. THE I2C BUS CONFIGURATION */
@@ -76,7 +85,8 @@
     status = "okay";
     compatible = "nordic,nrf-twi";
     pinctrl-0 = <&i2c0_default>;
-    pinctrl-names = "default";
+    pinctrl-1 = <&i2c0_sleep>;               /* ADD THIS LINE */
+    pinctrl-names = "default", "sleep";     /* CHANGE THIS TO INCLUDE BOTH STRINGS */
 
     oled: ssd1306@3c {
         compatible = "solomon,ssd1306fb";
