@@ -91,18 +91,18 @@
         compatible = "solomon,ssd1306fb";
         reg = <0x3c>;
         width = <128>;
-        height = <64>;
+        height = <64>;          /* Correct height for your panel */
         segment-remap;
         com-invdir;
         page-offset = <0>;
         display-offset = <0>;
-        multiplex-ratio = <63>;
+        multiplex-ratio = <63>; /* (Height - 1) */
         segment-offset = <0>;
         
-        /* CRITICAL FOR 128x64: Disable sequential mode to map all 64 rows cleanly */
-        com-noswap;
+        /* Standard 128x64 screens require sequential layout omitted or included.
+           We include it here as it matches the standard Amazon SSD1306 0.96" panels. */
+        com-sequential;
         
-        /* Forces the hardware charge pump to drive the taller pixel grid */
         prechargep = <0x22>;
     };
 };
