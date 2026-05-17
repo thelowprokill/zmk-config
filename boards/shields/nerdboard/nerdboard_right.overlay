@@ -91,7 +91,7 @@
         compatible = "solomon,ssd1306fb";
         reg = <0x3c>;
         width = <128>;
-        height = <64>;          /* Correct height for your panel */
+        height = <64>;          /* Matches your physical glass panel */
         segment-remap;
         com-invdir;
         page-offset = <0>;
@@ -99,10 +99,10 @@
         multiplex-ratio = <63>; /* (Height - 1) */
         segment-offset = <0>;
         
-        /* Standard 128x64 screens require sequential layout omitted or included.
-           We include it here as it matches the standard Amazon SSD1306 0.96" panels. */
-        com-sequential;
+        /* FIX: Switches from sequential to alternative mapping */
+        com-alternative;
         
-        prechargep = <0x22>;
+        /* FIX: High-drive power configuration for standard 128x64 panels */
+        prechargep = <0xF1>;
     };
 };
