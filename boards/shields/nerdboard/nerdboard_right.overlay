@@ -5,36 +5,36 @@
     col-offset = <4>;
 };
 
-/ {
-    trackball_listener: trackball_listener {
-        compatible = "zmk,input-listener";
-        device = <&trackball>;
-
-        drag_scroll {
-            layers = <6>;
-            input-processors = <&zip_xy_to_scroll_mapper>;
-        };
-
-        snipe {
-            layers = <5>;
-            input-processors = <&zip_xy_scaler 1 4>;
-        };
-    };
-};
-
-&spi0 {
-    status = "okay";
-    pinctrl-0 = <&spi0_default>;
-    pinctrl-names = "default";
-    cs-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>;
-
-    trackball: pmw3389@0 {
-        compatible = "pixart,pmw3389";
-        reg = <0>;
-        spi-max-frequency = <2000000>;
-        resolution = <800>;
-    };
-};
+/// {
+//    trackball_listener: trackball_listener {
+//        compatible = "zmk,input-listener";
+//        device = <&trackball>;
+//
+//        drag_scroll {
+//            layers = <6>;
+//            input-processors = <&zip_xy_to_scroll_mapper>;
+//        };
+//
+//        snipe {
+//            layers = <5>;
+//            input-processors = <&zip_xy_scaler 1 4>;
+//        };
+//    };
+//};
+//
+//&spi0 {
+//    status = "okay";
+//    pinctrl-0 = <&spi0_default>;
+//    pinctrl-names = "default";
+//    cs-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>;
+//
+//    trackball: pmw3389@0 {
+//        compatible = "pixart,pmw3389";
+//        reg = <0>;
+//        spi-max-frequency = <2000000>;
+//        resolution = <800>;
+//    };
+//};
 
 / {
     /* Tell Zephyr this SSD1306 is the chosen display */
