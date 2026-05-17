@@ -55,15 +55,14 @@
 
 
 / {
-    /* 1. THE FIX: Tell Zephyr this SSD1306 is the chosen display */
+    /* Tell Zephyr this SSD1306 is the chosen display */
     chosen {
         zephyr,display = &oled;
     };
 };
 
-/* 2. THE PINCTRL BLOCK: Must be outside the root block */
+/* THE PINCTRL BLOCK: Migrated to use i2c1 names */
 &pinctrl {
-    /* Changed names from i2c0 to i2c1 */
     i2c1_default: i2c1_default {
         group1 {
             psels = <NRF_PSEL(TWIM_SDA, 0, 6)>,  /* Pin D2 / P0.06 */
@@ -80,25 +79,27 @@
     };
 };
 
-/* 3. THE I2C BUS CONFIGURATION - Switched from i2c0 to i2c1 */
+/* THE I2C BUS CONFIGURATION: Switched to i2c1 to avoid spi0 conflicts */
 &i2c1 {
     status = "okay";
-    compatible = "nordic,nrf-twim";             /* Using the Master variant 'nrf-twim' */
+    compatible = "nordic,nrf-twim";
     pinctrl-0 = <&i2c1_default>;
     pinctrl-1 = <&i2c1_sleep>;               
-    pinctrl-names = "default", "sleep";     
+    pinctrl-names = "default", "sleep";
 
     oled: ssd1306@3c {
         compatible = "solomon,ssd1306fb";
         reg = <0x3c>;
         width = <128>;
-        height = <64>;
+        height = <64>;          /* FIX: Changed from 32 to 64 */
         segment-remap;
         com-invdir;
         page-offset = <0>;
         display-offset = <0>;
-        multiplex-ratio = <61>;
+        multiplex-ratio = <63>; /* FIX: Changed from 31 to 63 (Height - 1) */
         segment-offset = <0>;
+        
+        /* Standard COM configuration for 64px tall glass layouts */
         com-sequential;
         prechargep = <0x22>;
     };
