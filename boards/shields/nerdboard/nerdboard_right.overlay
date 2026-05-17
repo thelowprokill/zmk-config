@@ -91,7 +91,7 @@
         compatible = "solomon,ssd1306fb";
         reg = <0x3c>;
         width = <128>;
-        height = <64>;          /* Matches your physical glass panel */
+        height = <64>;          /* Correct physical height */
         segment-remap;
         com-invdir;
         page-offset = <0>;
@@ -99,10 +99,10 @@
         multiplex-ratio = <63>; /* (Height - 1) */
         segment-offset = <0>;
         
-        /* FIX: Switches from sequential to alternative mapping */
-        com-alternative;
+        /* NOTE: 'com-sequential' is omitted here. Leaving it out 
+           forces the driver into alternative COM pin mode. */
         
-        /* FIX: High-drive power configuration for standard 128x64 panels */
+        /* High-drive power configuration to clear up pixel scrambling */
         prechargep = <0xF1>;
     };
 };
