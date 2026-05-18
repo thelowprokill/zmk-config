@@ -59,42 +59,19 @@
     };
 };
 
-/* PINCTRL DEFINITIONS: Explicitly scoped inside the right-side shield overlay */
-&pinctrl {
-    i2c0_default: i2c0_default {
-        group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 17)>,  /* SDA Pin (006) */
-                    <NRF_PSEL(TWIM_SCL, 0, 20)>;  /* SCL Pin (008) */
-        };
-    };
-
-    i2c0_sleep: i2c0_sleep {
-        group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 17)>,
-                    <NRF_PSEL(TWIM_SCL, 0, 20)>;
-            low-power-enable;
-        };
-    };
-};
-
-/* THE HARDWARE I2C INTERFACE DEFINITION */
 &i2c0 {
     status = "okay";
-    compatible = "nordic,nrf-twim";
-    pinctrl-0 = <&i2c0_default>;
-    pinctrl-1 = <&i2c0_sleep>;               
-    pinctrl-names = "default", "sleep";
 
     oled: ssd1306@3d {
         compatible = "solomon,ssd1306fb";
         reg = <0x3d>;
         width = <128>;
-        height = <64>;          
+        height = <64>;
         segment-remap;
         com-invdir;
         page-offset = <0>;
         display-offset = <0>;
-        multiplex-ratio = <63>; 
+        multiplex-ratio = <63>;
         segment-offset = <0>;
         prechargep = <0xF1>;
     };
