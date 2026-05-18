@@ -59,11 +59,18 @@
     };
 };
 
+/ {
+    chosen {
+        zephyr,display = &oled;
+    };
+};
+
+/* PINCTRL DEFINITIONS: Explicitly scoped inside the right-side shield overlay */
 &pinctrl {
     i2c1_default: i2c1_default {
         group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 6)>,  /* Pin D2 / P0.06 */
-                    <NRF_PSEL(TWIM_SCL, 0, 8)>;  /* Pin D3 / P0.08 */
+            psels = <NRF_PSEL(TWIM_SDA, 0, 6)>,  /* SDA Pin (006) */
+                    <NRF_PSEL(TWIM_SCL, 0, 8)>;  /* SCL Pin (008) */
         };
     };
 
@@ -76,6 +83,7 @@
     };
 };
 
+/* THE HARDWARE I2C INTERFACE DEFINITION */
 &i2c1 {
     status = "okay";
     compatible = "nordic,nrf-twim";
@@ -85,7 +93,7 @@
 
     oled: ssd1306@3d {
         compatible = "solomon,ssd1306fb";
-        reg = <0x3d>;
+        reg = <0x3d>; /* Verified functional address */
         width = <128>;
         height = <64>;          
         segment-remap;
@@ -94,8 +102,6 @@
         display-offset = <0>;
         multiplex-ratio = <63>; 
         segment-offset = <0>;
-        
-        /* High-drive power configuration to force rendering on 0x3d panels */
         prechargep = <0xF1>;
     };
 };
