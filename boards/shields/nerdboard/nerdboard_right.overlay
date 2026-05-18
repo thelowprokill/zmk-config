@@ -21,37 +21,37 @@
         ;
 };
 
-/ {
-    trackball_listener: trackball_listener {
-        compatible = "zmk,input-listener";
-        device = <&trackball>;
-
-        drag_scroll {
-            layers = <6>; // _DRGSCRL
-            input-processors = <&zip_xy_to_scroll_mapper>;
-        };
-
-        snipe {
-            layers = <5>; // _SNIPE
-            input-processors = <&zip_xy_scaler 1 4>;
-        };
-    };
-};
-
-&spi0 {
-    status = "okay";
-    pinctrl-0 = <&spi0_default>;
-    pinctrl-names = "default";
-    cs-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>;
-
-    trackball: pmw3389@0 {
-        compatible = "pixart,pmw3389";
-        reg = <0>;
-        spi-max-frequency = <2000000>;
-        //irq-gpios = <&pro_micro 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        resolution = <800>;
-    };
-};
+/// {
+//    trackball_listener: trackball_listener {
+//        compatible = "zmk,input-listener";
+//        device = <&trackball>;
+//
+//        drag_scroll {
+//            layers = <6>; // _DRGSCRL
+//            input-processors = <&zip_xy_to_scroll_mapper>;
+//        };
+//
+//        snipe {
+//            layers = <5>; // _SNIPE
+//            input-processors = <&zip_xy_scaler 1 4>;
+//        };
+//    };
+//};
+//
+//&spi0 {
+//    status = "okay";
+//    pinctrl-0 = <&spi0_default>;
+//    pinctrl-names = "default";
+//    cs-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>;
+//
+//    trackball: pmw3389@0 {
+//        compatible = "pixart,pmw3389";
+//        reg = <0>;
+//        spi-max-frequency = <2000000>;
+//        //irq-gpios = <&pro_micro 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+//        resolution = <800>;
+//    };
+//};
 
 / {
     chosen {
@@ -62,15 +62,15 @@
 &pinctrl {
     i2c1_default: i2c1_default {
         group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 17)>,  /* Pin 006 (SDA) */
-                    <NRF_PSEL(TWIM_SCL, 0, 20)>;  /* Pin 008 (SCL) */
+            psels = <NRF_PSEL(TWIM_SDA, 0, 6)>,  /* Pin D2 / P0.06 */
+                    <NRF_PSEL(TWIM_SCL, 0, 8)>;  /* Pin D3 / P0.08 */
         };
     };
 
     i2c1_sleep: i2c1_sleep {
         group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 17)>,
-                    <NRF_PSEL(TWIM_SCL, 0, 20)>;
+            psels = <NRF_PSEL(TWIM_SDA, 0, 6)>,
+                    <NRF_PSEL(TWIM_SCL, 0, 8)>;
             low-power-enable;
         };
     };
@@ -78,6 +78,10 @@
 
 &i2c1 {
     status = "okay";
+    compatible = "nordic,nrf-twim";
+    pinctrl-0 = <&i2c1_default>;
+    pinctrl-1 = <&i2c1_sleep>;               
+    pinctrl-names = "default", "sleep";
 
     oled: ssd1306@3d {
         compatible = "solomon,ssd1306fb";
@@ -91,10 +95,7 @@
         multiplex-ratio = <63>; 
         segment-offset = <0>;
         
-        /* High-drive power configuration for 128x64 panels */
+        /* High-drive power configuration to force rendering on 0x3d panels */
         prechargep = <0xF1>;
-        
-        /* Forces maximum brightness/contrast on initialization */
-        contrast = <0xFF>;
     };
 };
