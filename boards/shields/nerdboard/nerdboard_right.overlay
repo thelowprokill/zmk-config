@@ -59,12 +59,6 @@
     };
 };
 
-/ {
-    chosen {
-        zephyr,display = &oled;
-    };
-};
-
 /* PINCTRL DEFINITIONS: Explicitly scoped inside the right-side shield overlay */
 &pinctrl {
     i2c0_default: i2c0_default {
