@@ -53,12 +53,25 @@
     };
 };
 
+/ {
+    chosen {
+        zephyr,display = &oled;
+    };
+};
+
 &pinctrl {
-    i2c0_default: i2c0_default {
+    i2c1_default: i2c1_default {
         group1 {
-            // Mapping to the physical '2' and '3' pins on the Pro Micro footprint
-            psels = <NRF_PSEL(TWIM_SDA, 0, 17)>,   // D2 / P0.17
-                    <NRF_PSEL(TWIM_SCL, 0, 20)>;   // D3 / P0.20
+            psels = <NRF_PSEL(TWIM_SDA, 0, 17)>,  /* Pin 006 (SDA) */
+                    <NRF_PSEL(TWIM_SCL, 0, 20)>;  /* Pin 008 (SCL) */
+        };
+    };
+
+    i2c1_sleep: i2c1_sleep {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 17)>,
+                    <NRF_PSEL(TWIM_SCL, 0, 20)>;
+            low-power-enable;
         };
     };
 };
