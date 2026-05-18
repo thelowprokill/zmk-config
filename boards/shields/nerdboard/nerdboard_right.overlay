@@ -52,3 +52,34 @@
         resolution = <800>;
     };
 };
+
+&pinctrl {
+    i2c0_default: i2c0_default {
+        group1 {
+            // Mapping to the physical '2' and '3' pins on the Pro Micro footprint
+            psels = <NRF_PSEL(TWIM_SDA, 0, 17)>,   // D2 / P0.17
+                    <NRF_PSEL(TWIM_SCL, 0, 20)>;   // D3 / P0.20
+        };
+    };
+};
+
+&i2c1 {
+    status = "okay";
+    pinctrl-0 = <&i2c1_default>;
+    pinctrl-names = "default";
+
+    oled: ssd1306@3c {
+        compatible = "solomon,ssd1306fb";
+        reg = <0x3c>;                // 0x3c is the standard I2C address for these OLEDs
+        width = <128>;               // Change to your screen's width
+        height = <64>;               // Change to 64 if using a 128x64 display
+        segment-remap;
+        com-invdir;
+        page-offset = <0>;
+        display-offset = <0>;
+        multiplex-ratio = <63>;      // Use 63 for 128x64 displays
+        segment-offset = <0>;
+        com-sequential;
+        prechargep = <0x22>;
+    };
+};
