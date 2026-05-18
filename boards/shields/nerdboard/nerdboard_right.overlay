@@ -78,21 +78,23 @@
 
 &i2c1 {
     status = "okay";
-    pinctrl-0 = <&i2c1_default>;
-    pinctrl-names = "default";
 
-    oled: ssd1306@3c {
+    oled: ssd1306@3d {
         compatible = "solomon,ssd1306fb";
-        reg = <0x3d>;                // 0x3c is the standard I2C address for these OLEDs
-        width = <128>;               // Change to your screen's width
-        height = <64>;               // Change to 64 if using a 128x64 display
+        reg = <0x3d>;
+        width = <128>;
+        height = <64>;          
         segment-remap;
         com-invdir;
         page-offset = <0>;
         display-offset = <0>;
-        multiplex-ratio = <63>;      // Use 63 for 128x64 displays
+        multiplex-ratio = <63>; 
         segment-offset = <0>;
-        com-sequential;
-        prechargep = <0x22>;
+        
+        /* High-drive power configuration for 128x64 panels */
+        prechargep = <0xF1>;
+        
+        /* Forces maximum brightness/contrast on initialization */
+        contrast = <0xFF>;
     };
 };
