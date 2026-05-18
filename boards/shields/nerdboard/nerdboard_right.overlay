@@ -83,7 +83,7 @@
 
     oled: ssd1306@3c {
         compatible = "solomon,ssd1306fb";
-        reg = <0x3c>;                // 0x3c is the standard I2C address for these OLEDs
+        reg = <0x3d>;                // 0x3c is the standard I2C address for these OLEDs
         width = <128>;               // Change to your screen's width
         height = <64>;               // Change to 64 if using a 128x64 display
         segment-remap;
