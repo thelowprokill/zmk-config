@@ -71,6 +71,7 @@
         com-invdir;
         multiplex-ratio = <63>;
         prechargep = <0x22>;
+        page-offset = <0>;
         segment-offset = <0>;
     };
 };
