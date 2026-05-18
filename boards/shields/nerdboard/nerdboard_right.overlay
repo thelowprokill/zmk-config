@@ -59,28 +59,12 @@
     };
 };
 
-&pinctrl {
-    nerdboard_i2c1_default: nerdboard_i2c1_default {
-        group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 17)>,
-                    <NRF_PSEL(TWIM_SCL, 0, 20)>;
-        };
-    };
-    nerdboard_i2c1_sleep: nerdboard_i2c1_sleep {
-        group1 {
-            psels = <NRF_PSEL(TWIM_SDA, 0, 17)>,
-                    <NRF_PSEL(TWIM_SCL, 0, 20)>;
-            low-power-enable;
-        };
-    };
-};
-
-&i2c1 {
+// i2c0 on nice!nano is already configured for P0.17 (SDA) / P0.20 (SCL)
+// in nice_nano-pinctrl.dtsi using the legacy nrf-twi driver (no EasyDMA).
+// That driver handles arbitrarily large I2C writes byte-by-byte, avoiding
+// the DMA chunking hang that occurs with nrf-twim for 128x64 framebuffers.
+&i2c0 {
     status = "okay";
-    compatible = "nordic,nrf-twim";
-    pinctrl-0 = <&nerdboard_i2c1_default>;
-    pinctrl-1 = <&nerdboard_i2c1_sleep>;
-    pinctrl-names = "default", "sleep";
     clock-frequency = <I2C_BITRATE_STANDARD>;
 
     oled: ssd1306@3c {
@@ -92,8 +76,5 @@
         com-invdir;
         multiplex-ratio = <63>;
         prechargep = <0x22>;
-        page-offset = <0>;
-        segment-offset = <0>;
-        display-offset = <0>;
     };
 };
