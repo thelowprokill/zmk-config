@@ -6,7 +6,31 @@ config ZMK_KEYBOARD_NAME
 config ZMK_SPLIT
     default y
 
-endif
+if ZMK_DISPLAY
+
+config I2C
+    default y
+
+endif # ZMK_DISPLAY
+
+if LVGL
+
+config LV_Z_VDB_SIZE
+    default 64
+
+config LV_DPI_DEF
+    default 148
+
+config LV_Z_BITS_PER_PIXEL
+    default 1
+
+choice LV_COLOR_DEPTH
+    default LV_COLOR_DEPTH_1
+endchoice
+
+endif # LVGL
+
+endif # SHIELD_NERDBOARD_LEFT || SHIELD_NERDBOARD_RIGHT
 
 if SHIELD_NERDBOARD_RIGHT
 
