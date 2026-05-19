@@ -55,6 +55,7 @@
         compatible = "zmk,keymap";
 
 //        game_layer {
+//            display-name = "Game"
 //            bindings = <
 //    &kp TAB   &kp N1  &kp N2    &kp LG(L)       &mkp MCLK &kp  N4    &kp F GAME
 //    &kp LSHFT &kp A   &kp W     &kp D           &mkp MB4  &mkp MB5   &kp R SYMBOL
@@ -64,7 +65,7 @@
 //        };
 
         jon_mac_layer {
-            display-name = "Base";
+            display-name = "Jon MAC 29";
             bindings = <
     &kp D       &kp W         &kp F       &kp P           &kp M   &kp U  &kp Y  &kp SEMI
     &mt LSHFT A &mt LCTRL R   &mt LALT S  &mt LSHIFT T    &kp N   &kp E  &kp I  &kp O
@@ -74,7 +75,7 @@
         };
 
         jon_mac_ext_layer {
-            display-name = "Ext";
+            display-name = "Jon MAC EXT";
             bindings = <
     &out OUT_USB &trans    &trans    &kp LBRC     &kp RBRC  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2
     &kp Z        &kp Q     &kp B     &kp LBKT     &kp RBKT  &kp COMMA     &kp DOT       &kp FSLH
@@ -84,7 +85,7 @@
         };
 
         symbol_layer {
-            display-name = "Symbol";
+            display-name = "Symbols";
             bindings = <
     &trans    &kp N7    &kp N8    &kp N9       &kp MINUS &kp PLUS  &kp ASTRK &kp FSLH
     &kp LSHFT &kp N4    &kp N5    &kp N6       &kp BSPC  &kp BSPC  &kp SQT   &kp DQT
@@ -124,7 +125,7 @@
         };
 
         dragscroll_layer {
-            display-name = "Scroll";
+            display-name = "Drag Scroll";
             bindings = <
     &trans &trans &trans &trans    &trans &trans &trans &trans
     &trans &trans &trans &trans    &trans &trans &trans &trans
