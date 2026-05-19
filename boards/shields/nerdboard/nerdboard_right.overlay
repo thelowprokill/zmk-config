@@ -21,37 +21,37 @@
         ;
 };
 
-/// {
-//    trackball_listener: trackball_listener {
-//        compatible = "zmk,input-listener";
-//        device = <&trackball>;
-//
-//        drag_scroll {
-//            layers = <6>; // _DRGSCRL
-//            input-processors = <&zip_xy_to_scroll_mapper>;
-//        };
-//
-//        snipe {
-//            layers = <5>; // _SNIPE
-//            input-processors = <&zip_xy_scaler 1 4>;
-//        };
-//    };
-//};
-//
-//&spi0 {
-//    status = "okay";
-//    pinctrl-0 = <&spi0_default>;
-//    pinctrl-names = "default";
-//    cs-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>;
-//
-//    trackball: pmw3389@0 {
-//        compatible = "pixart,pmw3389";
-//        reg = <0>;
-//        spi-max-frequency = <2000000>;
-//        //irq-gpios = <&pro_micro 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-//        resolution = <800>;
-//    };
-//};
+/ {
+    trackball_listener: trackball_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackball>;
+
+        drag_scroll {
+            layers = <6>; // _DRGSCRL
+            input-processors = <&zip_xy_to_scroll_mapper>;
+        };
+
+        snipe {
+            layers = <5>; // _SNIPE
+            input-processors = <&zip_xy_scaler 1 4>;
+        };
+    };
+};
+
+&spi0 {
+    status = "okay";
+    pinctrl-0 = <&spi0_default>;
+    pinctrl-names = "default";
+    cs-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>;
+
+    trackball: pmw3389@0 {
+        compatible = "pixart,pmw3389";
+        reg = <0>;
+        spi-max-frequency = <2000000>;
+        //irq-gpios = <&pro_micro 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        resolution = <800>;
+    };
+};
 
 / {
     chosen {
@@ -81,4 +81,3 @@
         display-offset = <0>;
     };
 };
-
