@@ -38,6 +38,16 @@ RC(2,0) RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5) RC(2,6) RC(2,7)
                     <NRF_PSEL(SPIM_MISO, 1, 11)>;
         };
     };
+
+    // I2C1 uses the same physical pins as I2C0 (P0.17 SDA, P0.20 SCL).
+    // I2C1 is at 0x40004000, separate from SPI0 at 0x40003000, so both
+    // can be active simultaneously once I2C0 is disabled.
+    i2c1_default: i2c1_default {
+        group1 {
+            psels = <NRF_PSEL(TWIM_SDA, 0, 17)>,
+                    <NRF_PSEL(TWIM_SCL, 0, 20)>;
+        };
+    };
 };
 
 //&spi0 {

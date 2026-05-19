@@ -38,6 +38,12 @@
     };
 };
 
+// SPI0 and I2C0 share the same nRF52840 hardware instance (0x40003000).
+// Disable I2C0 so SPI0 can own that instance for the trackball.
+&i2c0 {
+    status = "disabled";
+};
+
 &spi0 {
     status = "okay";
     pinctrl-0 = <&spi0_default>;
@@ -59,12 +65,15 @@
     };
 };
 
-// i2c0 on nice!nano is already configured for P0.17 (SDA) / P0.20 (SCL)
-// in nice_nano-pinctrl.dtsi using the legacy nrf-twi driver (no EasyDMA).
-// That driver handles arbitrarily large I2C writes byte-by-byte, avoiding
-// the DMA chunking hang that occurs with nrf-twim for 128x64 framebuffers.
-&i2c0 {
+// I2C1 is at 0x40004000 — separate hardware from SPI0 (0x40003000), so both
+// can be active simultaneously. Uses the same physical pins as I2C0 (P0.17 SDA,
+// P0.20 SCL) via pinctrl. nordic,nrf-twi (non-EasyDMA) handles arbitrarily
+// large writes byte-by-byte, avoiding any DMA buffer size limit.
+&i2c1 {
+    compatible = "nordic,nrf-twi";
     status = "okay";
+    pinctrl-0 = <&i2c1_default>;
+    pinctrl-names = "default";
     clock-frequency = <I2C_BITRATE_STANDARD>;
 
     oled: ssd1306@3c {
