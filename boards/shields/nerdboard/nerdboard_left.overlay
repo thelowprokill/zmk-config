@@ -1,5 +1,30 @@
 #include "nerdboard.overlay"
 
+/ {
+    chosen {
+        zephyr,display = &oled;
+    };
+};
+
+&i2c0 {
+    status = "okay";
+    clock-frequency = <I2C_BITRATE_STANDARD>;
+
+    oled: ssd1306@3c {
+        compatible = "solomon,ssd1306fb";
+        reg = <0x3c>;
+        width = <128>;
+        height = <64>;
+        segment-remap;
+        com-invdir;
+        multiplex-ratio = <63>;
+        prechargep = <0x22>;
+        page-offset = <0>;
+        segment-offset = <0>;
+        display-offset = <0>;
+    };
+};
+
 &kscan0 {
     row-gpios
         = <&pro_micro 21 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)> // F4
