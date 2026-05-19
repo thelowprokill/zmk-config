@@ -27,12 +27,12 @@
         device = <&trackball>;
 
         drag_scroll {
-            layers = <6>; // _DRGSCRL
+            layers = <7>; // _DRGSCRL
             input-processors = <&zip_xy_to_scroll_mapper>;
         };
 
         snipe {
-            layers = <5>; // _SNIPE
+            layers = <6>; // _SNIPE
             input-processors = <&zip_xy_scaler 1 4>;
         };
     };
