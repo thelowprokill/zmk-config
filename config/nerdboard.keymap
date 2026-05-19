@@ -59,7 +59,7 @@
             bindings = <
     &kp TAB   &kp N1  &kp N2    &kp LG(L)       &mkp MCLK &kp N4     &kp F  JONMAC
     &kp LSHFT &kp A   &kp W     &kp D           &mkp MB4  &mkp MB5   &kp R  SYMBOL
-    &kp LALT  &kp Q   &kp S     &kp E           &mkp LCLK JONMAC     SNIPE  DRGSCRL
+    &kp LALT  &kp Q   &kp S     &kp E           &mkp LCLK &mkp RCLK  SNIPE  DRGSCRL
               &kp ESC &kp LCTRL &kp SPACE       SYMBOL    GJONMAC
             >;
         };
@@ -69,7 +69,7 @@
             bindings = <
     &kp D       &kp W         &kp F       &kp P           &kp M   &kp U  &kp Y  &kp SEMI
     &mt LSHFT A &mt LCTRL R   &mt LALT S  &mt LSHIFT T    &kp N   &kp E  &kp I  &kp O
-    &kp G       &kp X         &kp C       &kp V           &kp H   &mo 2  &kp K  &kp L
+    &kp G       &kp X         &kp C       &kp V           &kp H   &kp J  &kp K  &kp L
                 &mt LCTRL RET MO_TAB      &kp SPACE       SY_GRV  JM_EXT
             >;
         };
@@ -107,7 +107,7 @@
         func_layer {
             display-name = "Fn";
             bindings = <
-    &trans       &kp K_VOL_UP  &kp F5    &kp LG(L)       &kp INS    &kp PSCRN  &sys_reset &trans
+    &trans       &kp K_VOL_UP  &kp F5    &kp LG(L)       &kp INS    &kp PSCRN  &sys_reset GAME
     &kp T_TAB_L  &kp K_MUTE    &kp F11   &kp TERM        &kp LGUI   &kp K_PREV &kp K_PP   &kp K_NEXT
     &kp LSHFT    &kp K_VOL_DN  &kp HOME  &kp END         &kp LG(aL) &kp LG(aD) &kp LG(aU) &kp LG(aR)
                  &trans        &trans    &trans          &trans     &trans
