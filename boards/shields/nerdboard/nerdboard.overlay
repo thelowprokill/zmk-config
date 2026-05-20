@@ -21,8 +21,7 @@ RC(2,0) RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5) RC(2,6) RC(2,7)
     // Define the node here first
     kscan0: kscan_0 {
         compatible = "zmk,kscan-gpio-matrix";
-        //diode-direction = "col2row";
-        diode-direction = "row2col";
+        diode-direction = "col2row";
         
         // Leave these empty here; they get filled in the _left and _right overlays
         row-gpios = <>;
@@ -34,7 +33,7 @@ RC(2,0) RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5) RC(2,6) RC(2,7)
 &pinctrl {
     spi0_default: spi0_default {
         group1 {
-            psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
+            psels = <NRF_PSEL(SPIM_SCK,  1, 13)>,
                     <NRF_PSEL(SPIM_MOSI, 0, 10)>,
                     <NRF_PSEL(SPIM_MISO, 1, 11)>;
         };
