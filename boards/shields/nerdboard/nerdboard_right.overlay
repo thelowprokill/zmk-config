@@ -22,6 +22,7 @@
 //};
 
 &kscan0 {
+    diode-direction = "col2row";
     // Change rows to be the driven outputs
     row-gpios
         = <&pro_micro 21 GPIO_ACTIVE_LOW> // F4
