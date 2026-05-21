@@ -6,7 +6,7 @@ manifest:
       url-base: https://github.com/zmkfirmware
     # Additional modules containing boards/shields/custom code can be listed here as well
     # See https://docs.zephyrproject.org/3.2.0/develop/west/manifest.html#projects
-    -name: george-norton
+    - name: george-norton
       url-base: https://github.com/george-norton
     #- name: thelowprokill
     #  url-base: https://github.com/thelowprokill
@@ -15,7 +15,7 @@ manifest:
       remote: zmkfirmware
       revision: main
       import: app/west.yml
-    -name: zmk-driver-pmw3360
+    - name: zmk-driver-pmw3360
       remote: george-norton
       revision: main
     #- name: pmw3389_zephyr_driver
