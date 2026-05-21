@@ -122,6 +122,18 @@
     trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
+
+        /* 
+         * Rotates the trackball coordinates by 15 degrees clockwise.
+         * ZMK uses a 2D rotation calculation where:
+         * X' = X * cos(theta) - Y * sin(theta)
+         * Y' = X * sin(theta) + Y * cos(theta)
+         * 
+         * For 15°: cos(15°) ≈ 0.9659, sin(15°) ≈ 0.2588
+         * In ZMK, values are scaled up by 100,000 for integer precision.
+         * cos(15°) = 96593, sin(15°) = 25882
+         */
+        input-processors = <&input_processor_rotation 96593 (-25882)>;
     };
 };
 
