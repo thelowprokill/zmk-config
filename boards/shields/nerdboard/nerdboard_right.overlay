@@ -1,6 +1,7 @@
 #include "nerdboard.overlay"
 #include <input/processors.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
+#include <dt-bindings/zmk/input_transform.h>
 
 &default_transform {
     col-offset = <4>;
@@ -49,22 +50,14 @@
 / {
     input_processors {
         trackball_rot15: trackball_rot15 {
-            compatible = "zmk,input-processor-rotation";
-            #input-processor-cells = <0>;
+            compatible = "zmk,input-processor-transform";
+            #input-processor-cells = <1>;
             
-            // Tell the driver to target relative movement event codes
             type = <INPUT_EV_REL>;
-            x-codes = <INPUT_REL_X>;
-            y-codes = <INPUT_REL_Y>;
             
-            /* 
-             * ZMK 2D transformation matrix logic:
-             * For 15° clockwise: cos(15°) ≈ 0.9659, sin(15°) ≈ 0.2588
-             * Quantized by multiplying by 100,000 for standard integer precision:
-             * cos = 96593, sin = 25882
-             */
-            matrix = <96593   25882
-                      (-25882) 96593>;
+            // Native ZMK uses 10x degree values for rotation angles
+            // 15° clockwise = 150
+            bindings = <&zip_xy_transform 150>;
         };
     };
 
@@ -72,8 +65,8 @@
         compatible = "zmk,input-listener";
         device = <&trackball>;
         
-        // Pass the processor instance reference here
-        input-processors = <&trackball_rot15>;
+        // Pass the processor reference along with an argument spacer cell
+        input-processors = <&trackball_rot15 0>;
     };
 };
 
