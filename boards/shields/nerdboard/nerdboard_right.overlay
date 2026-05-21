@@ -50,15 +50,16 @@
 / {
     input_processors {
         trackball_rot15: trackball_rot15 {
-            compatible = "zmk,input-processor-rotation";
-            #input-processor-cells = <0>;
+            // Uses the officially integrated ZMK driver template
+            compatible = "zmk,input-processor-transform";
+            #input-processor-cells = <1>;
             
             type = <INPUT_EV_REL>;
             x-codes = <INPUT_REL_X>;
             y-codes = <INPUT_REL_Y>;
             
             /* 
-             * ZMK 2D transformation matrix logic:
+             * Standard ZMK 2D transformation matrix driver logic:
              * For 15° clockwise: cos(15°) ≈ 0.9659, sin(15°) ≈ 0.2588
              * Quantized by multiplying by 100,000 for standard integer precision:
              * cos = 96593, sin = 25882
@@ -72,8 +73,8 @@
         compatible = "zmk,input-listener";
         device = <&trackball>;
         
-        // Match the 0-cell structure by dropping the trailing spacer index entirely
-        input-processors = <&trackball_rot15>;
+        // Pass your custom node mapping along with its required tracking argument cell
+        input-processors = <&trackball_rot15 0>;
     };
 };
 
