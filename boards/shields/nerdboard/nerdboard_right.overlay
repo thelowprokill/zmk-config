@@ -117,23 +117,33 @@
     };
 };
 
-// Ensure your input listener points to the updated trackball node label
+// 1. Create a custom input processor instance for the 15-degree rotation
+/ {
+    input_processors {
+        trackball_rot15: trackball_rot15 {
+            compatible = "zmk,input-processor-transform";
+            #input-processor-cells = <1>;
+            
+            /* 
+             * ZMK 2D transformation matrix logic:
+             * For 15° clockwise: cos(15°) ≈ 0.9659, sin(15°) ≈ 0.2588
+             * Quantized by multiplying by 100,000 for standard integer precision:
+             * cos = 96593, sin = 25882
+             */
+            matrix = <96593   25882
+                      (-25882) 96593>;
+        };
+    };
+};
+
+// 2. Attach the new custom processor directly to your trackball listener
 / {
     trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-
-        /* 
-         * Rotates the trackball coordinates by 15 degrees clockwise.
-         * ZMK uses a 2D rotation calculation where:
-         * X' = X * cos(theta) - Y * sin(theta)
-         * Y' = X * sin(theta) + Y * cos(theta)
-         * 
-         * For 15°: cos(15°) ≈ 0.9659, sin(15°) ≈ 0.2588
-         * In ZMK, values are scaled up by 100,000 for integer precision.
-         * cos(15°) = 96593, sin(15°) = 25882
-         */
-        input-processors = <&input_processor_rotation 96593 (-25882)>;
+        
+        // Pass the processor instance reference here
+        input-processors = <&trackball_rot15 0>;
     };
 };
 
