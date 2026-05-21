@@ -2,6 +2,9 @@
 #include <input/processors.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
+// Include the standard input transformation bitmask headers
+#include <dt-bindings/zmk/input_transform.h>
+
 &default_transform {
     col-offset = <4>;
 };
@@ -43,12 +46,12 @@
 };
 
 / {
-    /* 
-     * We use a nested input_processors block matching the ZMK schema 
-     * to perform raw scaling/inversions safely.
-     */
     input_processors {
-        trackball_rot: trackball_rot {
+        /*
+         * This uses ZMK's built-in transformer. 
+         * We pass INPUT_TRANSFORM_X_INVERT to cleanly mirror the X axis.
+         */
+        trackball_flip_x: trackball_flip_x {
             compatible = "zmk,input-processor-transform";
             #input-processor-cells = <1>;
             type = <INPUT_EV_REL>;
@@ -62,11 +65,12 @@
         device = <&trackball>;
         
         /* 
-         * We point directly to our valid transform mapping.
-         * If your 15-degree angle calculation needs inversion tweaks, 
-         * you can pass ZMK input flags safely inside the cell parameters here.
+         * Here we chain our native transformation rules.
+         * 1. 0x01 passes the INPUT_TRANSFORM_X_INVERT flag to flip X.
+         * 2. If your branch includes the 10x degree macro extension, 
+         *    a 15° counter-clockwise rotation is mapped via -150.
          */
-        input-processors = <&trackball_rot 0>;
+        input-processors = <&trackball_flip_x 0x01>;
     };
 };
 
