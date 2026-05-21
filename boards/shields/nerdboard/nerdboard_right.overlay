@@ -59,41 +59,67 @@
         ;
 };
 
-/ {
-    trackball_listener: trackball_listener {
-        compatible = "zmk,input-listener";
-        device = <&trackball>;
-
-        drag_scroll {
-            layers = <7>; // _DRGSCRL
-            input-processors = <&zip_xy_to_scroll_mapper>;
-        };
-
-        snipe {
-            layers = <6>; // _SNIPE
-            input-processors = <&zip_xy_scaler 1 4>;
-        };
-    };
-};
-
-// SPI0 and I2C0 share the same nRF52840 hardware instance (0x40003000).
-// Disable I2C0 so SPI0 can own that instance for the trackball.
-&i2c0 {
-    status = "disabled";
-};
+/// {
+//    trackball_listener: trackball_listener {
+//        compatible = "zmk,input-listener";
+//        device = <&trackball>;
+//
+//        drag_scroll {
+//            layers = <7>; // _DRGSCRL
+//            input-processors = <&zip_xy_to_scroll_mapper>;
+//        };
+//
+//        snipe {
+//            layers = <6>; // _SNIPE
+//            input-processors = <&zip_xy_scaler 1 4>;
+//        };
+//    };
+//};
+//
+//// SPI0 and I2C0 share the same nRF52840 hardware instance (0x40003000).
+//// Disable I2C0 so SPI0 can own that instance for the trackball.
+//&i2c0 {
+//    status = "disabled";
+//};
+//
+//&spi0 {
+//    status = "okay";
+//    pinctrl-0 = <&spi0_default>;
+//    pinctrl-names = "default";
+//    cs-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>;
+//
+//    trackball: pmw3389@0 {
+//        compatible = "pixart,pmw3389";
+//        reg = <0>;
+//        spi-max-frequency = <2000000>;
+//        //irq-gpios = <&pro_micro 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+//        resolution = <800>;
+//    };
+//};
 
 &spi0 {
     status = "okay";
-    pinctrl-0 = <&spi0_default>;
-    pinctrl-names = "default";
-    cs-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>;
+    cd-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>;
 
-    trackball: pmw3389@0 {
-        compatible = "pixart,pmw3389";
-        reg = <0>;
-        spi-max-frequency = <2000000>;
-        //irq-gpios = <&pro_micro 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
-        resolution = <800>;
+    trackball: trackball@0 {
+      compatible = "pixart,pmw3360";
+      status = "okay";
+      reg = <0>;
+      spi-max-frequency = <2000000>;
+
+      irq-gpios = <&gpio 27 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+
+      cpi = <600>;
+      // rotate-90;
+
+    };
+};
+
+// Ensure your input listener points to the updated trackball node label
+/ {
+    trackball_listener {
+        compatible = "zmk,input-listener";
+        device = <&trackball>;
     };
 };
 
