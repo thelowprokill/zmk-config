@@ -1,0 +1,27 @@
+# dts/bindings/input_processors/zmk,input-processor-rotation.yaml
+description: Custom 2D Matrix rotation input processor
+
+compatible: "zmk,input-processor-rotation"
+
+include: base.yaml
+
+properties:
+  "#input-processor-cells":
+    type: int
+    const: 0
+
+  type:
+    type: int
+    required: true
+
+  x-codes:
+    type: array
+    required: true
+
+  y-codes:
+    type: array
+    required: true
+
+  matrix:
+    type: array
+    required: true

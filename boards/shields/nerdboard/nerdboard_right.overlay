@@ -1,7 +1,6 @@
 #include "nerdboard.overlay"
 #include <input/processors.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
-#include <dt-bindings/zmk/input_transform.h>
 
 
 &default_transform {
@@ -51,17 +50,21 @@
 / {
     input_processors {
         trackball_rot15: trackball_rot15 {
-            compatible = "zmk,input-processor-rotation-angle";
-            #input-processor-cells = <1>;
+            compatible = "zmk,input-processor-rotation";
+            #input-processor-cells = <0>;
             
             type = <INPUT_EV_REL>;
-            
-            // Explicitly map your tracking coordinates to fulfill the schema requirements
             x-codes = <INPUT_REL_X>;
             y-codes = <INPUT_REL_Y>;
             
-            // Specify the exact clockwise degree value
-            angle = <15>;
+            /* 
+             * ZMK 2D transformation matrix logic:
+             * For 15° clockwise: cos(15°) ≈ 0.9659, sin(15°) ≈ 0.2588
+             * Quantized by multiplying by 100,000 for standard integer precision:
+             * cos = 96593, sin = 25882
+             */
+            matrix = <96593   25882
+                      (-25882) 96593>;
         };
     };
 
@@ -69,8 +72,8 @@
         compatible = "zmk,input-listener";
         device = <&trackball>;
         
-        // Pass your custom node mapping with its dynamic array argument spacer
-        input-processors = <&trackball_rot15 0>;
+        // Match the 0-cell structure by dropping the trailing spacer index entirely
+        input-processors = <&trackball_rot15>;
     };
 };
 
