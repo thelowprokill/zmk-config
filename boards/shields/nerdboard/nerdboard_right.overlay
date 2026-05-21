@@ -2,7 +2,6 @@
 #include <input/processors.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
-
 &default_transform {
     col-offset = <4>;
 };
@@ -22,7 +21,6 @@
         = <&pro_micro 5 GPIO_ACTIVE_LOW>
         , <&pro_micro 6 GPIO_ACTIVE_LOW>
         , <&pro_micro 7 GPIO_ACTIVE_LOW>
-        , <&pro_micro 8 GPIO_ACTIVE_LOW>
         ;
 };
 
@@ -33,48 +31,37 @@
     cs-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>;
 
     trackball: trackball@0 {
-      compatible = "pixart,pmw3360";
-      status = "okay";
-      reg = <0>;
-      spi-max-frequency = <2000000>;
+        compatible = "pixart,pmw3360";
+        status = "okay";
+        reg = <0>;
+        spi-max-frequency = <2000000>;
 
-      irq-gpios = <&pro_micro 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
+        irq-gpios = <&pro_micro 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 
-      cpi = <600>;
-      // rotate-90;
-
+        cpi = <600>;
+        
+        /* 
+         * FIX STEP 1: Apply the 15-degree clockwise rotation directly 
+         * inside the hardware sensor driver node.
+         */
+        rotation-angle = <15>; 
     };
 };
 
-
+/* 
+ * FIX STEP 2: We completely drop the problematic mathematical matrix 
+ * 'input_processors' node block and use standard ZMK logic.
+ */
 / {
-    input_processors {
-        trackball_rot15: trackball_rot15 {
-            // Uses the officially integrated ZMK driver template
-            compatible = "zmk,input-processor-transform";
-            #input-processor-cells = <1>;
-            
-            type = <INPUT_EV_REL>;
-            x-codes = <INPUT_REL_X>;
-            y-codes = <INPUT_REL_Y>;
-            
-            /* 
-             * Standard ZMK 2D transformation matrix driver logic:
-             * For 15° clockwise: cos(15°) ≈ 0.9659, sin(15°) ≈ 0.2588
-             * Quantized by multiplying by 100,000 for standard integer precision:
-             * cos = 96593, sin = 25882
-             */
-            matrix = <96593   25882
-                      (-25882) 96593>;
-        };
-    };
-
     trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
         
-        // Pass your custom node mapping along with its required tracking argument cell
-        input-processors = <&trackball_rot15 0>;
+        /* 
+         * If you just need the 15° rotation, leave this blank or 
+         * use standard scaling/features if needed, like:
+         * input-processors = <&zip_xy_scaler 1 1>;
+         */
     };
 };
 
@@ -84,10 +71,6 @@
     };
 };
 
-// I2C1 is at 0x40004000 — separate hardware from SPI0 (0x40003000), so both
-// can be active simultaneously. Uses the same physical pins as I2C0 (P0.17 SDA,
-// P0.20 SCL) via pinctrl. nordic,nrf-twi (non-EasyDMA) handles arbitrarily
-// large writes byte-by-byte, avoiding any DMA buffer size limit.
 &i2c1 {
     compatible = "nordic,nrf-twi";
     status = "okay";
@@ -108,6 +91,4 @@
         segment-offset = <0>;
         display-offset = <0>;
     };
-
-
 };
