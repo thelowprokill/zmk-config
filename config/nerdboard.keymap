@@ -125,7 +125,7 @@
         };
 
         dragscroll_layer {
-            display-name = "Drag Scroll";
+            display-name = "DrgScrl";
             bindings = <
     &trans &trans &trans &trans    &trans &trans &trans &trans
     &trans &trans &trans &trans    &trans &trans &trans &trans

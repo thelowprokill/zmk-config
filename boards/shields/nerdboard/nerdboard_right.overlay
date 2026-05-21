@@ -47,10 +47,32 @@
     };
 };
 
+// Keep in sync with layer indexes in nerdboard.keymap
+#define _SNIPE   6
+#define _DRGSCRL 7
+
 / {
-    trackball_listener {
+    trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_Y_INVERT)>;
+
+        snipe {
+            layers = <_SNIPE>;
+            input-processors = <
+                &zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_Y_INVERT)
+                &zip_xy_scaler 1 4
+            >;
+        };
+
+        scroll {
+            layers = <_DRGSCRL>;
+            input-processors = <
+                &zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_Y_INVERT)
+                &zip_xy_to_scroll_mapper
+                &zip_scroll_scaler 1 8
+            >;
+        };
     };
 };
 
