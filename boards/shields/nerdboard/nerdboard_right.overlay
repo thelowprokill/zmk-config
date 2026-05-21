@@ -99,6 +99,8 @@
 
 &spi0 {
     status = "okay";
+    pinctrl-0 = <&spi0_default>;
+    pinctrl-names = "default";
     cs-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>;
 
     trackball: trackball@0 {
