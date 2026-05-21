@@ -99,7 +99,7 @@
 
 &spi0 {
     status = "okay";
-    cd-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>;
+    cs-gpios = <&pro_micro 10 GPIO_ACTIVE_LOW>;
 
     trackball: trackball@0 {
       compatible = "pixart,pmw3360";
