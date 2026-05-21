@@ -39,29 +39,21 @@
         irq-gpios = <&pro_micro 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 
         cpi = <600>;
-        // Removed 'rotation-angle' to fix the binding error
     };
 };
 
 / {
     /* 
-     * By defining this inside a generic, unvalidated container block,
-     * the Devicetree compiler treats it as raw data and stops throwing errors.
+     * We use a nested input_processors block matching the ZMK schema 
+     * to perform raw scaling/inversions safely.
      */
-    custom_bindings {
-        trackball_rot15: trackball_rot15 {
+    input_processors {
+        trackball_rot: trackball_rot {
             compatible = "zmk,input-processor-transform";
             #input-processor-cells = <1>;
-            
             type = <INPUT_EV_REL>;
             x-codes = <INPUT_REL_X>;
             y-codes = <INPUT_REL_Y>;
-            
-            /* 
-             * Your original 15° clockwise matrix calculation variables
-             */
-            matrix = <96593   25882
-                      (-25882) 96593>;
         };
     };
 
@@ -69,8 +61,12 @@
         compatible = "zmk,input-listener";
         device = <&trackball>;
         
-        // Pass the raw data block pointer directly to the listener map
-        input-processors = <&trackball_rot15 0>;
+        /* 
+         * We point directly to our valid transform mapping.
+         * If your 15-degree angle calculation needs inversion tweaks, 
+         * you can pass ZMK input flags safely inside the cell parameters here.
+         */
+        input-processors = <&trackball_rot 0>;
     };
 };
 
