@@ -2,7 +2,7 @@
 #include <input/processors.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 
-// Include the standard input transformation bitmask headers
+// Include the official ZMK input transform definitions
 #include <dt-bindings/zmk/input_transform.h>
 
 &default_transform {
@@ -46,31 +46,16 @@
 };
 
 / {
-    input_processors {
-        /*
-         * This uses ZMK's built-in transformer. 
-         * We pass INPUT_TRANSFORM_X_INVERT to cleanly mirror the X axis.
-         */
-        trackball_flip_x: trackball_flip_x {
-            compatible = "zmk,input-processor-transform";
-            #input-processor-cells = <1>;
-            type = <INPUT_EV_REL>;
-            x-codes = <INPUT_REL_X>;
-            y-codes = <INPUT_REL_Y>;
-        };
-    };
-
     trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
         
         /* 
-         * Here we chain our native transformation rules.
-         * 1. 0x01 passes the INPUT_TRANSFORM_X_INVERT flag to flip X.
-         * 2. If your branch includes the 10x degree macro extension, 
-         *    a 15° counter-clockwise rotation is mapped via -150.
+         * Combines XY_SWAP and Y_INVERT inside parentheses.
+         * The Devicetree compiler handles the bitwise OR assignment perfectly,
+         * translating your trackball tracking 90° clockwise natively.
          */
-        input-processors = <&trackball_flip_x 0x01>;
+        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_Y_INVERT)>;
     };
 };
 
