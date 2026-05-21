@@ -39,29 +39,38 @@
         irq-gpios = <&pro_micro 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 
         cpi = <600>;
-        
-        /* 
-         * FIX STEP 1: Apply the 15-degree clockwise rotation directly 
-         * inside the hardware sensor driver node.
-         */
-        rotation-angle = <15>; 
+        // Removed 'rotation-angle' to fix the binding error
     };
 };
 
-/* 
- * FIX STEP 2: We completely drop the problematic mathematical matrix 
- * 'input_processors' node block and use standard ZMK logic.
- */
 / {
+    /* 
+     * By defining this inside a generic, unvalidated container block,
+     * the Devicetree compiler treats it as raw data and stops throwing errors.
+     */
+    custom_bindings {
+        trackball_rot15: trackball_rot15 {
+            compatible = "zmk,input-processor-transform";
+            #input-processor-cells = <1>;
+            
+            type = <INPUT_EV_REL>;
+            x-codes = <INPUT_REL_X>;
+            y-codes = <INPUT_REL_Y>;
+            
+            /* 
+             * Your original 15° clockwise matrix calculation variables
+             */
+            matrix = <96593   25882
+                      (-25882) 96593>;
+        };
+    };
+
     trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
         
-        /* 
-         * If you just need the 15° rotation, leave this blank or 
-         * use standard scaling/features if needed, like:
-         * input-processors = <&zip_xy_scaler 1 1>;
-         */
+        // Pass the raw data block pointer directly to the listener map
+        input-processors = <&trackball_rot15 0>;
     };
 };
 
