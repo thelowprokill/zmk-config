@@ -43,6 +43,7 @@
 
         cpi = <600>;
         angle-tune = <(-15)>;
+        invert-x;
     };
 };
 
@@ -50,13 +51,6 @@
     trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        
-        /* 
-         * Combines XY_SWAP and Y_INVERT inside parentheses.
-         * The Devicetree compiler handles the bitwise OR assignment perfectly,
-         * translating your trackball tracking 90° clockwise natively.
-         */
-        input-processors = <&zip_xy_transform (INPUT_TRANSFORM_XY_SWAP | INPUT_TRANSFORM_Y_INVERT)>;
     };
 };
 
