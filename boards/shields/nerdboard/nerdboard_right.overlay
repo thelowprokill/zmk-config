@@ -1,5 +1,6 @@
 #include "nerdboard.overlay"
 #include <input/processors.dtsi>
+#include <zephyr/dt-bindings/input/input-event-codes.h>
 
 &default_transform {
     col-offset = <4>;
@@ -117,12 +118,17 @@
     };
 };
 
-// 1. Create a custom input processor instance for the 15-degree rotation
+
 / {
     input_processors {
         trackball_rot15: trackball_rot15 {
-            compatible = "zmk,input-processor-transform";
+            compatible = "zmk,input-processor-rotation";
             #input-processor-cells = <1>;
+            
+            // Tell the driver to target relative movement event codes
+            type = <INPUT_EV_REL>;
+            x-codes = <INPUT_REL_X>;
+            y-codes = <INPUT_REL_Y>;
             
             /* 
              * ZMK 2D transformation matrix logic:
@@ -134,10 +140,7 @@
                       (-25882) 96593>;
         };
     };
-};
 
-// 2. Attach the new custom processor directly to your trackball listener
-/ {
     trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
