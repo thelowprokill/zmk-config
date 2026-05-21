@@ -3,6 +3,7 @@
 #include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <dt-bindings/zmk/input_transform.h>
 
+
 &default_transform {
     col-offset = <4>;
 };
@@ -50,14 +51,17 @@
 / {
     input_processors {
         trackball_rot15: trackball_rot15 {
-            compatible = "zmk,input-processor-transform";
+            compatible = "zmk,input-processor-rotation-angle";
             #input-processor-cells = <1>;
             
             type = <INPUT_EV_REL>;
             
-            // Native ZMK uses 10x degree values for rotation angles
-            // 15° clockwise = 150
-            bindings = <&zip_xy_transform 150>;
+            // Explicitly map your tracking coordinates to fulfill the schema requirements
+            x-codes = <INPUT_REL_X>;
+            y-codes = <INPUT_REL_Y>;
+            
+            // Specify the exact clockwise degree value
+            angle = <15>;
         };
     };
 
@@ -65,7 +69,7 @@
         compatible = "zmk,input-listener";
         device = <&trackball>;
         
-        // Pass the processor reference along with an argument spacer cell
+        // Pass your custom node mapping with its dynamic array argument spacer
         input-processors = <&trackball_rot15 0>;
     };
 };
