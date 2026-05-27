@@ -51,6 +51,17 @@
 #define T_TAB_C LS(LC(W))
 
 / {
+    behaviors {
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
+            require-prior-idle-ms = <125>;
+            bindings = <&kp>, <&kp>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -68,9 +79,9 @@
             display-name = "JonMAC 29";
             bindings = <
     &kp D       &kp W         &kp F       &kp P           &kp M   &kp U  &kp Y  &kp SEMI
-    &mt LSHFT A &mt LCTRL R   &mt LALT S  &mt LSHIFT T    &kp N   &kp E  &kp I  &kp O
+    &hm LSHFT A &hm LCTRL R   &hm LALT S  &hm LSHIFT T    &kp N   &kp E  &kp I  &kp O
     &kp G       &kp X         &kp C       &kp V           &kp H   &kp J  &kp K  &kp L
-                &mt LCTRL RET MO_TAB      &kp SPACE       SY_GRV  JM_EXT
+                &hm LCTRL RET MO_TAB      &kp SPACE       SY_GRV  JM_EXT
             >;
         };
 
