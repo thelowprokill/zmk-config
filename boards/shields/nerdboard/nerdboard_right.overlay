@@ -42,7 +42,7 @@
 
         irq-gpios = <&pro_micro 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 
-        cpi = <600>;
+        cpi = <400>;
         angle-tune = <(-15)>;
         invert-x;
     };
