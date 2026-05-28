@@ -21,6 +21,7 @@
 #define _FN      5
 #define _SNIPE   6
 #define _DRGSCRL 7
+#define _SNISCRL 8
 
 // layer modifiers
 #define GAME    &to _GAME
@@ -32,6 +33,7 @@
 #define FN      &mo _FN
 #define SNIPE   &mo _SNIPE
 #define DRGSCRL &mo _DRGSCRL
+#define SNISCRL &mo _SNISCRL
 
 // layer tap
 #define MO_TAB &lt _MOUSE  TAB
@@ -128,15 +130,25 @@
         snipe_layer {
             display-name = "Snipe";
             bindings = <
-    &trans &trans &trans &trans    &trans &trans &trans &trans
-    &trans &trans &trans &trans    &trans &trans &trans &trans
-    &trans &trans &trans &trans    &trans &trans &trans &trans
+    &trans &trans &trans &trans    &trans &trans &trans  &trans
+    &trans &trans &trans &trans    &trans &trans &trans  &trans
+    &trans &trans &trans &trans    &trans &trans SNISCRL SNISCRL
            &trans &trans &trans    &trans &trans
             >;
         };
 
         dragscroll_layer {
             display-name = "DrgScrl";
+            bindings = <
+    &trans &trans &trans &trans    &trans &trans &trans  &trans
+    &trans &trans &trans &trans    &trans &trans &trans  &trans
+    &trans &trans &trans &trans    &trans &trans SNISCRL SNISCRL
+           &trans &trans &trans    &trans &trans
+            >;
+        };
+
+        snipescroll_layer {
+            display-name = "SnipeScrl";
             bindings = <
     &trans &trans &trans &trans    &trans &trans &trans &trans
     &trans &trans &trans &trans    &trans &trans &trans &trans

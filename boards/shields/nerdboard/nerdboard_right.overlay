@@ -49,6 +49,7 @@
 // Keep in sync with layer indexes in nerdboard.keymap
 #define _SNIPE   6
 #define _DRGSCRL 7
+#define _SNISCRL 8
 
 / {
     trackball_listener: trackball_listener {
@@ -70,6 +71,15 @@
                 &zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)
                 &zip_xy_to_scroll_mapper
                 &zip_scroll_scaler 1 16
+            >;
+        };
+
+        scroll {
+            layers = <_SNISCRL>;
+            input-processors = <
+                &zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)
+                &zip_xy_to_scroll_mapper
+                &zip_scroll_scaler 1 32
             >;
         };
     };
