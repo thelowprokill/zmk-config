@@ -4,6 +4,14 @@
     chosen {
         zmk,matrix_transform = &default_transform;
         zmk,kscan = &kscan0;
+        zmk,battery = &vbatt;
+    };
+
+    vbatt: vbatt {
+        compatible = "zmk,battery-voltage-divider";
+        io-channels = <&adc 7>; // ADC channel 7 = AIN7 = P0.31 = pro micro 21 = F4
+        output-ohms = <1000000>;
+        full-ohms = <2000000>;
     };
 
     default_transform: keymap_transform_0 {
@@ -29,6 +37,10 @@ RC(2,0) RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5) RC(2,6) RC(2,7)
     };
 };
 
+
+&adc {
+    status = "okay";
+};
 
 &pinctrl {
     spi0_default: spi0_default {

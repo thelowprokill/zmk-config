@@ -3,14 +3,6 @@
 / {
     chosen {
         zephyr,display = &oled;
-        zmk,battery = &vbatt;
-    };
-
-    vbatt: vbatt {
-        compatible = "zmk,battery-voltage-divider";
-        io-channels = <&adc 7>; // ADC channel 7 = AIN7 = P0.31 = pro micro 21 = F4
-        output-ohms = <1000000>;
-        full-ohms = <2000000>;
     };
 };
 
@@ -66,8 +58,4 @@
         , <&pro_micro 6 GPIO_ACTIVE_LOW>
         , <&pro_micro 5 GPIO_ACTIVE_LOW>
         ;
-};
-
-&adc {
-    status = "okay";
 };
