@@ -1,8 +1,6 @@
 #include "nerdboard.overlay"
 #include <input/processors.dtsi>
 #include <zephyr/dt-bindings/input/input-event-codes.h>
-
-// Include the official ZMK input transform definitions
 #include <dt-bindings/zmk/input_transform.h>
 
 &default_transform {
@@ -77,30 +75,4 @@
     };
 };
 
-/ {
-    chosen {
-        zephyr,display = &oled;
-    };
-};
 
-&i2c1 {
-    compatible = "nordic,nrf-twi";
-    status = "okay";
-    pinctrl-0 = <&i2c1_default>;
-    pinctrl-names = "default";
-    clock-frequency = <I2C_BITRATE_STANDARD>;
-
-    oled: ssd1306@3c {
-        compatible = "solomon,ssd1306fb";
-        reg = <0x3c>;
-        width = <128>;
-        height = <64>;
-        segment-remap;
-        com-invdir;
-        multiplex-ratio = <63>;
-        prechargep = <0x22>;
-        page-offset = <0>;
-        segment-offset = <0>;
-        display-offset = <0>;
-    };
-};

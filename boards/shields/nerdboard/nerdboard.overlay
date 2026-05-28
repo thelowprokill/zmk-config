@@ -5,6 +5,7 @@
         zmk,matrix_transform = &default_transform;
         zmk,kscan = &kscan0;
         zmk,battery = &vbatt;
+        zephyr,display = &oled;
     };
 
     vbatt: vbatt {
@@ -40,6 +41,28 @@ RC(2,0) RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5) RC(2,6) RC(2,7)
 
 &adc {
     status = "okay";
+};
+
+&i2c1 {
+    compatible = "nordic,nrf-twi";
+    status = "okay";
+    pinctrl-0 = <&i2c1_default>;
+    pinctrl-names = "default";
+    clock-frequency = <I2C_BITRATE_STANDARD>;
+
+    oled: ssd1306@3c {
+        compatible = "solomon,ssd1306fb";
+        reg = <0x3c>;
+        width = <128>;
+        height = <64>;
+        segment-remap;
+        com-invdir;
+        multiplex-ratio = <63>;
+        prechargep = <0x22>;
+        page-offset = <0>;
+        segment-offset = <0>;
+        display-offset = <0>;
+    };
 };
 
 &pinctrl {
