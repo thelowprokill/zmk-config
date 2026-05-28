@@ -14,7 +14,7 @@
     diode-direction = "col2row";
 
     row-gpios
-        = <&pro_micro 21 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
+        = <&pro_micro  1 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
         , <&pro_micro 20 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
         , <&pro_micro 19 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
         , <&pro_micro 18 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>
@@ -81,6 +81,12 @@
     chosen {
         zephyr,display = &oled;
     };
+};
+
+&vbatt {
+    io-channels = <&adc 7>; // ADC channel 7 // P0.31 // pro micro 21 // F4
+    output-ohms = <1000000>;
+    full-ohms = <2000000>;
 };
 
 &i2c1 {
