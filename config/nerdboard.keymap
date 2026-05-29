@@ -90,10 +90,10 @@
         jon_mac_ext_layer {
             display-name = "JonMAC EX";
             bindings = <
-    &out OUT_USB &trans    &trans    &kp LBRC     &kp RBRC  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2
-    &kp Z        &kp Q     &kp B     &kp LBKT     &kp RBKT  &kp COMMA     &kp DOT       &kp FSLH
-    &out OUT_BLE &trans    &kp BSLH  &kp LPAR     &kp RPAR  &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_CLR
-                 &kp LCTRL &kp LSHFT &kp SPACE    SYMBOL    &kp RALT
+    &out OUT_USB &bt BT_CLR &trans    &kp LBRC     &kp RBRC  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2
+    &kp Z        &kp Q      &kp B     &kp LBKT     &kp RBKT  &kp COMMA     &kp DOT       &kp FSLH
+    &out OUT_BLE &trans     &kp BSLH  &kp LPAR     &kp RPAR  &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_Sel 5
+                 &kp LCTRL  &kp LSHFT &kp SPACE    SYMBOL    &kp RALT
             >;
         };
 
