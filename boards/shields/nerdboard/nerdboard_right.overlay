@@ -65,7 +65,7 @@
             >;
         };
 
-        scroll {
+        dragscroll {
             layers = <_DRGSCRL>;
             input-processors = <
                 &zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)
@@ -74,7 +74,7 @@
             >;
         };
 
-        scroll {
+        snipescroll {
             layers = <_SNISCRL>;
             input-processors = <
                 &zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)
