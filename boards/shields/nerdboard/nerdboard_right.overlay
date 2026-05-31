@@ -52,7 +52,7 @@
 
         irq-gpios = <&pro_micro 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 
-        cpi = <400>;
+        cpi = <300>;
         angle-tune = <(-15)>;
         invert-x;
     };
@@ -73,7 +73,7 @@
             layers = <_SNIPE>;
             input-processors = <
                 //&zip_xy_transform ()
-                &zip_xy_scaler 1 4
+                &zip_xy_scaler 1 2
             >;
         };
 
