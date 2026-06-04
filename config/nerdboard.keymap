@@ -65,6 +65,20 @@
         };
     };
 
+    macros {
+        // Macro to clear stuck modifiers and mouse buttons
+        clear_stuck: clear_stuck {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            tap-ms = <10>;
+            bindings
+                = <&macro_release &kp LSHFT &kp RSHFT &kp LCTRL &kp RCTRL &kp LALT &kp RALT &kp LGUI &kp RGUI>
+                , <&macro_release &mkp LCLK &mkp RCLK &mkp MCLK &mkp MB4 &mkp MB5>
+                ;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
@@ -121,7 +135,7 @@
         func_layer {
             display-name = "Fn";
             bindings = <
-    &trans       &kp K_VOL_UP  &kp F5    &kp LG(L)       &kp INS    &kp PSCRN  &sys_reset GAME
+    &clear_stuck &kp K_VOL_UP  &kp F5    &kp LG(L)       &kp INS    &kp PSCRN  &sys_reset GAME
     &kp T_TAB_L  &kp K_MUTE    &kp F11   &kp TERM        &kp LGUI   &kp K_PREV &kp K_PP   &kp K_NEXT
     &kp LSHFT    &kp K_VOL_DN  &kp HOME  &kp END         &kp LG(aL) &kp LG(aD) &kp LG(aU) &kp LG(aR)
                  &trans        &trans    &trans          &trans     &trans
