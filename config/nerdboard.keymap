@@ -86,7 +86,7 @@
             display-name = "Game";
             bindings = <
     &kp TAB   &kp N1  &kp N2    &kp N3          &mkp MCLK &kp N4     &kp F  JONMAC
-    &kp LSHFT &kp A   &kp W     &kp D           &mkp MB4  &mkp MB5   &kp R  clear_stuck
+    &kp LSHFT &kp A   &kp W     &kp D           &mkp MB4  &mkp MB5   &kp R  &clear_stuck
     &kp LALT  &kp Q   &kp S     &kp E           &mkp LCLK &mkp RCLK  SNIPE  DRGSCRL
               &kp ESC &kp LCTRL &kp SPACE       SYMBOL    GJONMAC
             >;
