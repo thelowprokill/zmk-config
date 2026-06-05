@@ -67,12 +67,19 @@
     trackball_listener: trackball_listener {
         compatible = "zmk,input-listener";
         device = <&trackball>;
-        //input-processors = <&zip_xy_transform ()>;
+
+        snipescroll {
+            layers = <_SNISCRL>;
+            input-processors = <
+                &zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)
+                &zip_xy_to_scroll_mapper
+                &zip_scroll_scaler 1 32
+            >;
+        };
 
         snipe {
             layers = <_SNIPE>;
             input-processors = <
-                //&zip_xy_transform ()
                 &zip_xy_scaler 1 2
             >;
         };
@@ -83,15 +90,6 @@
                 &zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)
                 &zip_xy_to_scroll_mapper
                 &zip_scroll_scaler 1 16
-            >;
-        };
-
-        snipescroll {
-            layers = <_SNISCRL>;
-            input-processors = <
-                &zip_xy_transform (INPUT_TRANSFORM_Y_INVERT)
-                &zip_xy_to_scroll_mapper
-                &zip_scroll_scaler 1 32
             >;
         };
     };
