@@ -125,8 +125,8 @@
         mouse_layer {
             display-name = "Mouse";
             bindings = <
-    &kp T_TAB_C  &kp T_TAB_N  &trans    &kp LG(T)        &mkp MCLK &trans    &trans    &trans
-    &kp T_TAB_L  &kp T_TAB_R  &kp WS_L  &kp WS_R         &mkp MB4  &mkp MB5  &kp RCTRL &trans
+    &kp T_TAB_C  &kp T_TAB_N  &trans    &kp LG(T)        &mkp MCLK &trans    &trans    &C_BRI_UP
+    &kp T_TAB_L  &kp T_TAB_R  &kp WS_L  &kp WS_R         &mkp MB4  &mkp MB5  &kp RCTRL &C_BRI_DN
     &kp LSHFT    &kp LCTRL    &kp LALT  &kp LGUI         &mkp LCLK &mkp RCLK SNIPE     DRGSCRL
                  &trans       FN        &trans           FN        &trans
             >;
