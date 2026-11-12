@@ -52,6 +52,9 @@
 
         irq-gpios = <&pro_micro 0 (GPIO_ACTIVE_LOW | GPIO_PULL_UP)>;
 
+        // Min time between sensor reads (us). The sensor accumulates motion in
+        // between, so nothing is lost; this just stops it out-running BLE.
+        polling-interval = <5000>;
         cpi = <400>;
         angle-tune = <(-15)>;
         invert-x;
