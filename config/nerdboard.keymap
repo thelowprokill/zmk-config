@@ -63,6 +63,15 @@
             require-prior-idle-ms = <125>;
             bindings = <&kp>, <&kp>;
         };
+
+        // Hold 1s to clear the BT bond; a tap or a quick brush does nothing.
+        hold_clr: hold_clear {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <1000>;
+            bindings = <&bt>, <&none>;
+        };
     };
 
     macros {
@@ -105,7 +114,7 @@
         jon_mac_ext_layer {
             display-name = "JonMAC EX";
             bindings = <
-    &out OUT_USB &bt BT_CLR &trans    &kp LBRC     &kp RBRC  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2
+    &out OUT_USB &hold_clr BT_CLR &trans    &kp LBRC     &kp RBRC  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2
     &kp Z        &kp Q      &kp B     &kp LBKT     &kp RBKT  &kp COMMA     &kp DOT       &kp FSLH
     &out OUT_BLE &trans     &kp BSLH  &kp LPAR     &kp RPAR  &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_SEL 5
                  &kp LCTRL  &kp LSHFT &kp SPACE    SYMBOL    &kp RALT
