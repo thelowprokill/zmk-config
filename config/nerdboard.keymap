@@ -64,17 +64,41 @@
             bindings = <&kp>, <&kp>;
         };
 
-        // Hold 1s to clear the BT bond; a tap or a quick brush does nothing.
-        hold_clr: hold_clear {
+        // BT/output keys only fire after a deliberate 500ms hold; a tap (e.g. rolling
+        // off JM_EXT onto L while typing "table") does nothing.
+        hold_bt: hold_bt {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <1000>;
+            tapping-term-ms = <500>;
             bindings = <&bt>, <&none>;
+        };
+
+        hold_sel: hold_sel {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <500>;
+            bindings = <&bt_sel>, <&none>;
+        };
+
+        hold_out: hold_out {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <500>;
+            bindings = <&out>, <&none>;
         };
     };
 
     macros {
+        // &bt needs two params; a hold-tap only passes one, so wrap BT_SEL.
+        bt_sel: bt_sel {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings = <&macro_param_1to2>, <&bt BT_SEL MACRO_PLACEHOLDER>;
+        };
+
         // Macro to clear stuck modifiers and mouse buttons
         clear_stuck: clear_stuck {
             compatible = "zmk,behavior-macro";
@@ -114,10 +138,10 @@
         jon_mac_ext_layer {
             display-name = "JonMAC EX";
             bindings = <
-    &out OUT_USB &hold_clr BT_CLR &trans    &kp LBRC     &kp RBRC  &bt BT_SEL 0  &bt BT_SEL 1  &bt BT_SEL 2
-    &kp Z        &kp Q      &kp B     &kp LBKT     &kp RBKT  &kp COMMA     &kp DOT       &kp FSLH
-    &out OUT_BLE &trans     &kp BSLH  &kp LPAR     &kp RPAR  &bt BT_SEL 3  &bt BT_SEL 4  &bt BT_SEL 5
-                 &kp LCTRL  &kp LSHFT &kp SPACE    SYMBOL    &kp RALT
+    &hold_out OUT_USB 0  &hold_bt BT_CLR  &trans    &kp LBRC  &kp RBRC  &hold_sel 0 0  &hold_sel 1 0  &hold_sel 2 0
+    &kp Z                &kp Q            &kp B     &kp LBKT  &kp RBKT  &kp COMMA      &kp DOT        &kp FSLH
+    &hold_out OUT_BLE 0  &trans           &kp BSLH  &kp LPAR  &kp RPAR  &hold_sel 3 0  &hold_sel 4 0  &hold_sel 5 0
+                         &kp LCTRL        &kp LSHFT &kp SPACE SYMBOL    &kp RALT
             >;
         };
 
