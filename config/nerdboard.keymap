@@ -64,29 +64,31 @@
             bindings = <&kp>, <&kp>;
         };
 
-        // BT/output keys only fire after a deliberate 300ms hold; a tap (e.g. rolling
-        // off JM_EXT onto L while typing "table") does nothing.
+        // BT clear waits 500ms
         hold_bt: hold_bt {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <200>;
+            tapping-term-ms = <500>;
             bindings = <&bt>, <&none>;
         };
 
+        // BT/sel keys only fire after a deliberate 200ms hold; a tap (e.g. rolling
+        // off JM_EXT onto L while typing "table") does nothing.
         hold_sel: hold_sel {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <300>;
+            tapping-term-ms = <200>;
             bindings = <&bt_sel>, <&none>;
         };
 
+        // BT/output keys only fire after a deliberate 200ms hold
         hold_out: hold_out {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <500>;
+            tapping-term-ms = <200>;
             bindings = <&out>, <&none>;
         };
     };
