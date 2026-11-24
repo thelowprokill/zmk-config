@@ -52,19 +52,28 @@
 #define T_TAB_N LS(LC(T))
 #define T_TAB_C LS(LC(W))
 
-// BT profile select fires only on a double tap; a single tap (e.g. rolling
-// off JM_EXT onto L while typing "table") does nothing.
-#define BT_DT(n) \
-    td_bt##n: td_bt##n { \
+// BT select / output keys fire on a double tap OR a 200ms hold; a single tap
+// (e.g. rolling off JM_EXT onto L while typing "table") does nothing.
+// The tap-dance waits its 200ms term, then presses the hold-tap; if the key is
+// still held, the hold-tap's 1ms term makes it fire right away (~200ms total).
+#define HOLD_OR_DT(name, hold, now) \
+    name: name { \
         compatible = "zmk,behavior-tap-dance"; \
         #binding-cells = <0>; \
         tapping-term-ms = <200>; \
-        bindings = <&none>, <&bt BT_SEL n>; \
+        bindings = <hold>, <now>; \
     };
 
 / {
     behaviors {
-        BT_DT(0) BT_DT(1) BT_DT(2) BT_DT(3) BT_DT(4) BT_DT(5)
+        HOLD_OR_DT(td_bt0, &hold_sel 0 0, &bt BT_SEL 0)
+        HOLD_OR_DT(td_bt1, &hold_sel 1 0, &bt BT_SEL 1)
+        HOLD_OR_DT(td_bt2, &hold_sel 2 0, &bt BT_SEL 2)
+        HOLD_OR_DT(td_bt3, &hold_sel 3 0, &bt BT_SEL 3)
+        HOLD_OR_DT(td_bt4, &hold_sel 4 0, &bt BT_SEL 4)
+        HOLD_OR_DT(td_bt5, &hold_sel 5 0, &bt BT_SEL 5)
+        HOLD_OR_DT(td_usb, &hold_out OUT_USB 0, &out OUT_USB)
+        HOLD_OR_DT(td_ble, &hold_out OUT_BLE 0, &out OUT_BLE)
 
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
@@ -76,6 +85,15 @@
             bindings = <&kp>, <&kp>;
         };
 
+        // Only used inside HOLD_OR_DT: the tap-dance already supplies the 200ms delay.
+        hold_sel: hold_sel {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <1>;
+            bindings = <&bt_sel>, <&none>;
+        };
+
         // BT clear waits 500ms
         hold_bt: hold_bt {
             compatible = "zmk,behavior-hold-tap";
@@ -85,17 +103,24 @@
             bindings = <&bt>, <&none>;
         };
 
-        // BT/output keys only fire after a deliberate 200ms hold
+        // Only used inside HOLD_OR_DT, same as hold_sel.
         hold_out: hold_out {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <200>;
+            tapping-term-ms = <1>;
             bindings = <&out>, <&none>;
         };
     };
 
     macros {
+        // &bt needs two params; a hold-tap only passes one, so wrap BT_SEL.
+        bt_sel: bt_sel {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            bindings = <&macro_param_1to2>, <&bt BT_SEL MACRO_PLACEHOLDER>;
+        };
+
         // Macro to clear stuck modifiers and mouse buttons
         clear_stuck: clear_stuck {
             compatible = "zmk,behavior-macro";
@@ -135,9 +160,9 @@
         jon_mac_ext_layer {
             display-name = "JonMAC EX";
             bindings = <
-    &hold_out OUT_USB 0  &hold_bt BT_CLR  &trans    &kp LBRC  &kp RBRC  &td_bt0   &td_bt1 &td_bt2
+    &td_usb              &hold_bt BT_CLR  &trans    &kp LBRC  &kp RBRC  &td_bt0   &td_bt1 &td_bt2
     &kp Z                &kp Q            &kp B     &kp LBKT  &kp RBKT  &kp COMMA &kp DOT &kp FSLH
-    &hold_out OUT_BLE 0  &trans           &kp BSLH  &kp LPAR  &kp RPAR  &td_bt3   &td_bt4 &td_bt5
+    &td_ble              &trans           &kp BSLH  &kp LPAR  &kp RPAR  &td_bt3   &td_bt4 &td_bt5
                          &kp LCTRL        &kp LSHFT &kp SPACE SYMBOL    &kp RALT
             >;
         };
