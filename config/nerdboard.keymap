@@ -52,8 +52,20 @@
 #define T_TAB_N LS(LC(T))
 #define T_TAB_C LS(LC(W))
 
+// BT profile select fires only on a double tap; a single tap (e.g. rolling
+// off JM_EXT onto L while typing "table") does nothing.
+#define BT_DT(n) \
+    td_bt##n: td_bt##n { \
+        compatible = "zmk,behavior-tap-dance"; \
+        #binding-cells = <0>; \
+        tapping-term-ms = <200>; \
+        bindings = <&none>, <&bt BT_SEL n>; \
+    };
+
 / {
     behaviors {
+        BT_DT(0) BT_DT(1) BT_DT(2) BT_DT(3) BT_DT(4) BT_DT(5)
+
         hm: homerow_mods {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
@@ -73,16 +85,6 @@
             bindings = <&bt>, <&none>;
         };
 
-        // BT/sel keys only fire after a deliberate 200ms hold; a tap (e.g. rolling
-        // off JM_EXT onto L while typing "table") does nothing.
-        hold_sel: hold_sel {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            flavor = "tap-preferred";
-            tapping-term-ms = <200>;
-            bindings = <&bt_sel>, <&none>;
-        };
-
         // BT/output keys only fire after a deliberate 200ms hold
         hold_out: hold_out {
             compatible = "zmk,behavior-hold-tap";
@@ -94,13 +96,6 @@
     };
 
     macros {
-        // &bt needs two params; a hold-tap only passes one, so wrap BT_SEL.
-        bt_sel: bt_sel {
-            compatible = "zmk,behavior-macro-one-param";
-            #binding-cells = <1>;
-            bindings = <&macro_param_1to2>, <&bt BT_SEL MACRO_PLACEHOLDER>;
-        };
-
         // Macro to clear stuck modifiers and mouse buttons
         clear_stuck: clear_stuck {
             compatible = "zmk,behavior-macro";
@@ -140,9 +135,9 @@
         jon_mac_ext_layer {
             display-name = "JonMAC EX";
             bindings = <
-    &hold_out OUT_USB 0  &hold_bt BT_CLR  &trans    &kp LBRC  &kp RBRC  &hold_sel 0 0  &hold_sel 1 0  &hold_sel 2 0
-    &kp Z                &kp Q            &kp B     &kp LBKT  &kp RBKT  &kp COMMA      &kp DOT        &kp FSLH
-    &hold_out OUT_BLE 0  &trans           &kp BSLH  &kp LPAR  &kp RPAR  &hold_sel 3 0  &hold_sel 4 0  &hold_sel 5 0
+    &hold_out OUT_USB 0  &hold_bt BT_CLR  &trans    &kp LBRC  &kp RBRC  &td_bt0   &td_bt1 &td_bt2
+    &kp Z                &kp Q            &kp B     &kp LBKT  &kp RBKT  &kp COMMA &kp DOT &kp FSLH
+    &hold_out OUT_BLE 0  &trans           &kp BSLH  &kp LPAR  &kp RPAR  &td_bt3   &td_bt4 &td_bt5
                          &kp LCTRL        &kp LSHFT &kp SPACE SYMBOL    &kp RALT
             >;
         };
