@@ -18,8 +18,5 @@ manifest:
     #- name: zmk-driver-pmw3360
     #  remote: thelowprokill
     #  revision: main
-    - name: pmw3389_zephyr_driver
-      remote: thelowprokill
-      revision: main
   self:
     path: config
