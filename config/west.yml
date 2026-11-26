@@ -15,12 +15,11 @@ manifest:
       remote: zmkfirmware
       revision: main
       import: app/west.yml
-    - name: zmk-driver-pmw3360
-      remote: thelowprokill
-    #  remote: george-norton
-      revision: main
-    #- name: pmw3389_zephyr_driver
+    #- name: zmk-driver-pmw3360
     #  remote: thelowprokill
     #  revision: main
+    - name: pmw3389_zephyr_driver
+      remote: thelowprokill
+      revision: main
   self:
     path: config
