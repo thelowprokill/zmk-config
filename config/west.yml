@@ -15,8 +15,8 @@ manifest:
       remote: zmkfirmware
       revision: main
       import: app/west.yml
-    #- name: zmk-driver-pmw3360
-    #  remote: thelowprokill
-    #  revision: main
+    - name: zmk-driver-pmw3360
+      remote: thelowprokill
+      revision: pmw3389
   self:
     path: config
